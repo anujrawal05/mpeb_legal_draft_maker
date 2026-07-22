@@ -1,7 +1,14 @@
 let extractedData = {};
 
+// Auto-fill API Key if configured in local config.js
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.GEMINI_API_KEY) {
+    document.getElementById('apiKey').value = window.GEMINI_API_KEY;
+  }
+});
+
 async function processDocument() {
-  const apiKey = document.getElementById('apiKey').value.trim();
+  const apiKey = document.getElementById('apiKey').value.trim() || window.GEMINI_API_KEY;
   const fileInput = document.getElementById('fileInput').files[0];
 
   if (!apiKey) return alert("Please enter your Gemini API Key.");
@@ -37,7 +44,7 @@ async function processDocument() {
       Respond ONLY with the raw JSON string. Do not include markdown code blocks.
     `;
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
