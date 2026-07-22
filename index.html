@@ -88,10 +88,14 @@
       body { background: #fff; color: #000; }
     }
     
-    .legal-table, .legal-table th, .legal-table td {
-      border: 1px solid black;
+    table, th, td {
       border-collapse: collapse;
-      padding: 3px 6px;
+    }
+    .legal-table, .legal-table th, .legal-table td {
+      border: 1px solid #000000 !important;
+      border-collapse: collapse !important;
+      padding: 4px 6px !important;
+      vertical-align: top !important;
     }
 
     /* Standardized typography scales */
@@ -111,7 +115,8 @@
     }
     .page-a4.parivad-page td, .page-a4.parivad-page th {
       font-size: 10pt !important;
-      padding: 3px 6px !important;
+      padding: 4px 6px !important;
+      vertical-align: top !important;
     }
     
     .page-legal, .page-a4:not(.parivad-page) {
@@ -130,7 +135,8 @@
     }
     .page-legal td, .page-legal th, .page-a4:not(.parivad-page) td, .page-a4:not(.parivad-page) th {
       font-size: 10pt !important;
-      padding: 3px 6px !important;
+      padding: 4px 6px !important;
+      vertical-align: top !important;
     }
   </style>
 </head>
@@ -287,8 +293,8 @@
 
       <div class="mt-8 flex justify-end text-xs">
         <div class="text-right leading-relaxed">
-          <p class="font-bold">प्रकरण प्रस्तुत करने वाले अधिवक्ता</p>
-          <p class="font-bold mt-4">का नाम : श्रीमती अर्पिता रावल एड. MP/838/2012</p>
+          <p class="font-bold"><span class="inline-block whitespace-nowrap">प्रकरण प्रस्तुत करने वाले अधिवक्ता का नाम :</span> श्रीमती अर्पिता रावल</p>
+          <p class="font-semibold mt-1">पंजीयन क्रमांक: MP/838/2012</p>
           <p>हस्ताक्षर : _________________________________</p>
           <p>मोबाइल नं. : 8878977124</p>
           <p>ई-मेल आईडी. : arpitarawal1983@gmail.com</p>

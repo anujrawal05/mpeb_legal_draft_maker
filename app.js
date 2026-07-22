@@ -28,7 +28,7 @@ async function processDocument() {
       {
         "accused_list": [
           {
-            "name": "Full Name of accused/owner/user (e.g. अनवर ख़ॉन)",
+            "name": "Given/first name of accused (e.g. अनवर) WITHOUT father's name or patronymic suffix",
             "father_name": "Father's name (if available, else empty string)",
             "age": "Age in numbers (e.g. 25)",
             "role": "भवन स्वामी / उपयोगकर्ता / भवन स्वामी एवं उपयोगकर्ता",
@@ -120,9 +120,43 @@ async function processDocument() {
     };
 
     let parsed = JSON.parse(cleanJson);
+    
+    // Set default fallback values for Complainant Officer
+    if (!parsed.officer_name) parsed.officer_name = 'महेश कुमार वर्मा';
+    if (!parsed.officer_father_name) parsed.officer_father_name = 'मनोहर लाल वर्मा';
+    if (!parsed.officer_age) parsed.officer_age = '39';
+
+    // Post-processing to strip redundant father's name from accused names
     if (parsed.accused_list) {
+      parsed.accused_list.forEach(acc => {
+        if (acc.name && acc.father_name) {
+          const n = acc.name.trim();
+          const f = acc.father_name.trim();
+          if (n.endsWith(f) && n.length > f.length) {
+            acc.name = n.substring(0, n.length - f.length).trim();
+            // Strip trailing connectors like "पिता" or "आत्मज"
+            acc.name = acc.name.replace(/(\u092a\u093f\u0924\u093e|\u0906\u0924\u094d\u092e\u091c)$/, '').trim();
+          }
+        }
+      });
       parsed.accused_list = deduplicateAccusedList(parsed.accused_list);
     }
+
+    // Fallback logic for missing village field
+    if (!parsed.village) {
+      let foundVillage = '';
+      if (parsed.accused_list && parsed.accused_list.length > 0) {
+        const addr = parsed.accused_list[0].address || '';
+        const match = addr.match(/(?:ग्राम|ग्राम-)\s*([^\s,।]+)/);
+        if (match && match[1]) {
+          foundVillage = match[1];
+        } else if (addr) {
+          foundVillage = addr.split(',')[0].replace(/(तहसील|जिला|थाना).*/g, '').trim();
+        }
+      }
+      parsed.village = foundVillage || 'जहाँगीरपुर';
+    }
+
     extractedData = Object.assign({}, defaultData, parsed);
     populateFormGrid(extractedData);
     document.getElementById('reviewSection').classList.remove('hidden');
@@ -294,6 +328,15 @@ function updateData() {
     extractedData.accused_list.forEach(acc => {
       for (const k in acc) {
         acc[k] = sanitize(acc[k]);
+      }
+      // Strip redundant father name from accused name in manual edits
+      if (acc.name && acc.father_name) {
+        const n = acc.name.trim();
+        const f = acc.father_name.trim();
+        if (n.endsWith(f) && n.length > f.length) {
+          acc.name = n.substring(0, n.length - f.length).trim();
+          acc.name = acc.name.replace(/(\u092a\u093f\u0924\u093e|\u0906\u0924\u094d\u092e\u091c)$/, '').trim();
+        }
       }
     });
   }
