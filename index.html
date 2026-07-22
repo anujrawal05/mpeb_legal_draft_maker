@@ -15,27 +15,47 @@
         background-color: #f3f4f6;
         padding: 40px 0;
       }
-      .print-page {
+      .page-legal, .page-a4 {
         margin: 0 auto 30px auto !important;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         border: 1px solid #e5e7eb;
         background: #ffffff;
+        box-sizing: border-box;
+      }
+      .page-legal {
+        width: 215.9mm;
+        height: 355.6mm;
+      }
+      .page-a4 {
+        width: 210mm;
+        height: 297mm;
       }
     }
 
-    /* Strict Legal A4 Print Styling */
+    /* Strict Legal and A4 Print Styling */
     @media print {
       .no-print { display: none !important; }
       .no-print-bg { background-color: transparent !important; padding: 0 !important; margin: 0 !important; }
-      .print-page { 
+      
+      .page-legal, .page-a4 {
         page-break-after: always; 
         margin: 0 !important;
-        padding: 15mm !important;
-        width: 210mm !important;
-        min-height: 297mm !important;
         box-shadow: none !important;
         border: none !important;
+        background: #ffffff;
+        box-sizing: border-box;
       }
+
+      .page-legal {
+        width: 215.9mm !important;
+        height: 355.6mm !important;
+      }
+
+      .page-a4 {
+        width: 210mm !important;
+        height: 297mm !important;
+      }
+      
       body { background: #fff; color: #000; }
     }
     
@@ -82,7 +102,7 @@
   <div id="documentOutput" class="hidden max-w-4xl mx-auto my-6 space-y-8 no-print-bg">
     
     <!-- DOCUMENT 1: Front Cover -->
-    <div class="print-page bg-white shadow-lg mx-auto p-12 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-legal text-black relative" style="padding: 20mm; font-family: 'Noto Sans Devanagari', sans-serif;">
       <div class="text-center font-bold text-lg leading-snug">
         माननीय न्यायालय विशेष न्यायाधीश महोदय (विद्युत अधिनियम)<br>
         एवं अतिरिक्त जिला एवं सत्र न्यायाधीश, बड़नगर, जिला उज्जैन (म.प्र.)
@@ -129,7 +149,7 @@
         <span class="font-bold text-base">विशेष परिवाद पत्र अन्तर्गत धारा 135, विद्युत अधिनियम, 2003</span>
       </div>
 
-      <div class="mt-12 text-sm">
+      <div class="absolute" style="bottom: 20mm; right: 20mm; text-align: right;">
         <p class="font-bold underline">परिवादी की ओर से अधिवक्ता:</p>
         <div class="mt-2 font-bold leading-relaxed">
           <p class="text-base text-blue-900">श्रीमती अर्पिता रावल</p>
@@ -142,7 +162,7 @@
     </div>
 
     <!-- DOCUMENT 2: Computer Patrak (प्रारूप संख्या-2) -->
-    <div class="print-page bg-white shadow-lg mx-auto p-12 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-a4 text-black relative" style="padding: 10mm 15mm; font-family: 'Noto Sans Devanagari', sans-serif;">
       <div class="text-center font-bold text-base">प्रारूप संख्या-2</div>
       <div class="text-center text-xs font-semibold">(अध्याय-1 अ नियम-3)</div>
       <div class="text-center font-bold text-lg underline mt-1">कम्प्यूटर-पत्रक</div>
@@ -229,7 +249,7 @@
     </div>
 
     <!-- DOCUMENT 3: Vakalatnama -->
-    <div class="print-page bg-white shadow-lg mx-auto p-12 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-a4 text-black relative" style="padding: 15mm; font-family: 'Noto Sans Devanagari', sans-serif;">
       <div class="text-center font-bold text-lg underline">वकालतनामा</div>
       <div class="text-center text-xs font-semibold mt-1">(एडवोकेट एक्ट, 1961 के अधीन बनाए गए नियमों का नियम 4(1))</div>
 
@@ -310,7 +330,7 @@
     </div>
 
     <!-- DOCUMENT 4: Form 8 -->
-    <div class="print-page bg-white shadow-lg mx-auto p-10 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-a4 text-black relative" style="padding: 10mm; font-family: 'Noto Sans Devanagari', sans-serif;">
       <div class="text-center font-bold text-sm">प्रारूप संख्या-8</div>
       <div class="text-center text-[10px] font-semibold">(अध्याय-4 नियम-52)</div>
       <div class="text-center font-bold text-sm mt-1">................................ (म.प्र.) के न्यायालय में</div>
@@ -380,7 +400,7 @@
 
     <!-- DOCUMENT 5: Criminal Complaint (विशेष आपराधिक परिवाद) -->
     <!-- Page 1 of Complaint -->
-    <div class="print-page bg-white shadow-lg mx-auto p-12 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-a4 text-black relative" style="padding: 20mm 15mm 20mm 25mm; font-family: 'Noto Sans Devanagari', sans-serif;">
       <div class="text-center font-bold text-base leading-snug">
         माननीय न्यायालय विशेष न्यायाधीश महोदय,<br>
         (अन्तर्गत विद्युत अधिनियम 2003) उज्जैन (म.प्र.)
@@ -448,7 +468,7 @@
     </div>
 
     <!-- Page 2 of Complaint -->
-    <div class="print-page bg-white shadow-lg mx-auto p-12 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-a4 text-black relative" style="padding: 20mm 15mm 20mm 25mm; font-family: 'Noto Sans Devanagari', sans-serif;">
       <div class="text-sm font-bold mb-4 underline">10. अपराध का विवरण :</div>
       <div class="text-xs space-y-4 text-justify leading-relaxed">
         <p class="font-bold">अपराध का विवरण निम्नानुसार है :-</p>
@@ -465,7 +485,7 @@
     </div>
 
     <!-- Page 3 of Complaint -->
-    <div class="print-page bg-white shadow-lg mx-auto p-12 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-a4 text-black relative" style="padding: 20mm 15mm 20mm 25mm; font-family: 'Noto Sans Devanagari', sans-serif;">
       <div class="text-xs space-y-4 text-justify leading-relaxed">
         <p>
           <b>IV.)</b> यह कि, आरोपीगण द्वारा अभियोगी वितरण कंपनी को आर्थिक क्षति कारित करने के बेईमानीपूर्ण आशय से विद्युत ऊर्जा की सीधी चोरी की गई है। आरोपीगण का कृत्य धारा 135 विद्युत अधिनियम 2003 के अंतर्गत दंडनीय होकर संज्ञेय तथा गैर-जमानतीय अपराध की श्रेणी में आता है।
@@ -501,7 +521,7 @@
     </div>
 
     <!-- Page 4 of Complaint -->
-    <div class="print-page bg-white shadow-lg mx-auto p-12 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-a4 text-black relative" style="padding: 20mm 15mm 20mm 25mm; font-family: 'Noto Sans Devanagari', sans-serif;">
       <div class="text-center font-bold text-sm my-6">।। प्रार्थना ।।</div>
       <div class="text-xs text-justify leading-relaxed space-y-4">
         <p>
