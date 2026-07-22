@@ -1,0 +1,110 @@
+let extractedData = {};
+
+async function processDocument() {
+  const apiKey = document.getElementById('apiKey').value.trim();
+  const fileInput = document.getElementById('fileInput').files[0];
+
+  if (!apiKey) return alert("Please enter your Gemini API Key.");
+  if (!fileInput) return alert("Please upload the inspection PDF/image.");
+
+  document.getElementById('processBtn').innerText = "Analyzing Document with AI...";
+  document.getElementById('processBtn').disabled = true;
+
+  try {
+    const base64Data = await convertFileToBase64(fileInput);
+    const mimeType = fileInput.type || 'application/pdf';
+
+    const prompt = `
+      Extract the following electricity theft inspection details from this document into a valid JSON object:
+      {
+        "consumer_name": "Name of primary owner/consumer",
+        "user_name": "Name of user/accused present",
+        "user_age": "Age",
+        "mobile": "Mobile number",
+        "village": "Village name",
+        "panchanama_no": "Panchanama number",
+        "inspection_date": "Inspection Date (DD-MM-YYYY)",
+        "inspection_time": "Inspection Time",
+        "officer_name": "Inspection Officer Name",
+        "distribution_center": "Distribution center / Vitran Kendra",
+        "sanctioned_load": "Connected Load e.g. 2530 WATT",
+        "assessment_amount": "Assessment Amount in INR",
+        "compounding_amount": "Compounding Amount in INR",
+        "total_amount": "Total Amount in INR",
+        "notice_no": "Section 152 notice number",
+        "notice_date": "Notice Date"
+      }
+      Respond ONLY with the raw JSON string. Do not include markdown code blocks.
+    `;
+
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{
+          parts: [
+            { text: prompt },
+            { inline_data: { mime_type: mimeType, data: base64Data } }
+          ]
+        }]
+      })
+    });
+
+    const result = await response.json();
+    const rawText = result.candidates[0].content.parts[0].text;
+    const cleanJson = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+    
+    extractedData = JSON.parse(cleanJson);
+    populateFormGrid(extractedData);
+    document.getElementById('reviewSection').classList.remove('hidden');
+
+  } catch (error) {
+    alert("Extraction Failed: " + error.message);
+  } finally {
+    document.getElementById('processBtn').innerText = "Extract Data & Generate Drafts";
+    document.getElementById('processBtn').disabled = false;
+  }
+}
+
+function convertFileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = error => reject(error);
+    reader.readAsDataURL(file);
+  });
+}
+
+function populateFormGrid(data) {
+  const container = document.getElementById('formGrid');
+  container.innerHTML = '';
+  
+  for (const [key, value] of Object.entries(data)) {
+    container.innerHTML += `
+      <div>
+        <label class="block font-semibold capitalize text-xs text-gray-600">${key.replace('_', ' ')}:</label>
+        <input type="text" data-key="${key}" value="${value || ''}" class="w-full p-1 border rounded text-sm edit-field" oninput="updateData()">
+      </div>
+    `;
+  }
+  updateData();
+}
+
+function updateData() {
+  document.querySelectorAll('.edit-field').forEach(input => {
+    const key = input.getAttribute('data-key');
+    extractedData[key] = input.value;
+  });
+
+  // Inject updated fields into rendered HTML document
+  for (const [key, value] of Object.entries(extractedData)) {
+    document.querySelectorAll(`.field-${key}`).forEach(el => {
+      el.innerText = value || 'N/A';
+    });
+  }
+}
+
+function generatePrintView() {
+  document.getElementById('documentOutput').classList.remove('hidden');
+  window.print();
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Electricity Theft Case Drafting Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts for perfect Hindi Devanagari rendering -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans Devanagari', sans-serif; }
+    
+    /* Strict Legal A4 Print Styling */
+    @media print {
+      .no-print { display: none !important; }
+      .print-page { 
+        page-break-after: always; 
+        margin: 0;
+        padding: 15mm;
+        width: 210mm;
+        min-height: 297mm;
+      }
+      body { background: #fff; color: #000; }
+    }
+    
+    .legal-table, .legal-table th, .legal-table td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 4px 8px;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen">
+
+  <!-- Control Panel UI (Hidden during Printing) -->
+  <div class="no-print max-w-4xl mx-auto p-6 bg-white my-6 rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold mb-4 text-blue-900">M.P. West Zone Electricity Court Filing System</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block font-semibold mb-1">1. Enter Google Gemini API Key (Free):</label>
+        <input type="password" id="apiKey" class="w-full p-2 border rounded" placeholder="AIzaSy...">
+        <p class="text-xs text-gray-500 mt-1">Get a free key at <a href="https://aistudio.google.com/" target="_blank" class="text-blue-600 underline">aistudio.google.com</a></p>
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">2. Select Inspection Report (data.pdf / image):</label>
+        <input type="file" id="fileInput" accept="application/pdf,image/*" class="w-full p-1 border rounded">
+      </div>
+    </div>
+
+    <button onclick="processDocument()" id="processBtn" class="w-full bg-blue-700 text-white py-2 rounded font-bold hover:bg-blue-800">
+      Extract Data & Generate Drafts
+    </button>
+
+    <!-- Verification / Review Section -->
+    <div id="reviewSection" class="hidden mt-6 border-t pt-4">
+      <h2 class="text-xl font-bold text-red-700 mb-2">Verify Extracted Case Information</h2>
+      <p class="text-sm text-gray-600 mb-4">Carefully check all extracted values against the original inspection document before generating final court PDFs.</p>
+      
+      <div id="formGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+        <!-- Dynamically Populated Form Fields -->
+      </div>
+
+      <div class="mt-6 flex gap-4">
+        <button onclick="generatePrintView()" class="bg-green-700 text-white px-6 py-2 rounded font-bold hover:bg-green-800">
+          Print / Save Full PDF Set (A4)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Document Template Render Area -->
+  <div id="documentOutput" class="hidden">
+    
+    <!-- DOCUMENT 1: Special Criminal Complaint u/s 135 -->
+    <div class="print-page bg-white">
+      <div class="text-center font-bold text-base leading-snug">
+        माननीय न्यायालय विशेष न्यायाधीश महोदय,<br>
+        (अन्तर्गत विद्युत अधिनियम 2003) उज्जैन (म.प्र.)
+      </div>
+      
+      <div class="flex justify-between my-2 text-sm">
+        <span>प्रकरण क्रमांकः ______ /2026</span>
+        <span>विशेष आपराधिक परिवाद</span>
+      </div>
+
+      <table class="w-full legal-table text-xs mb-4">
+        <tr>
+          <td class="w-1/3 font-bold">1. परिवादी का नाम व पताः</td>
+          <td>
+            मध्यप्रदेश पश्चिम क्षेत्र विद्युत वितरण कंपनी लिमिटेड, द्वाराः - <span class="field-officer_name font-bold"></span>, 
+            कनिष्ठ यंत्री, वितरण केंद्र <span class="field-distribution_center font-bold"></span>, 
+            संभाग बड़नगर, म.प्र.प.क्षे.वि.वि.कं.लि., जिला उज्जैन (म.प्र.)
+          </td>
+        </tr>
+        <tr>
+          <td class="font-bold">2. आरोपी / उपयोगकर्ता का नाम व पताः</td>
+          <td>
+            1. <span class="field-consumer_name font-bold"></span> (भवन स्वामी / उपभोक्ता)<br>
+            2. <span class="field-user_name font-bold"></span>, उम्र <span class="field-user_age"></span> वर्ष (उपयोगकर्ता)<br>
+            पता - ग्राम <span class="field-village"></span>, थाना इंगोरिया, तहसील बड़नगर, जिला उज्जैन (म.प्र.)<br>
+            मोबाईल नंबर- <span class="field-mobile"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-bold">3. अपराध की धारा व प्रकार:</td>
+          <td>धारा 135, विद्युत अधिनियम 2003 (विद्युत ऊर्जा की सीधी चोरी)</td>
+        </tr>
+        <tr>
+          <td class="font-bold">4. अपराध दिनांक, समय व स्थल:</td>
+          <td>
+            दिनांक <span class="field-inspection_date font-bold"></span>, समय <span class="field-inspection_time"></span><br>
+            ग्राम <span class="field-village"></span>, तहसील बड़नगर, जिला उज्जैन
+          </td>
+        </tr>
+        <tr>
+          <td class="font-bold">5. आर्थिक क्षति व शमन शुल्क:</td>
+          <td>
+            क्षति राशि: ₹<span class="field-assessment_amount font-bold"></span>/- | 
+            शमन शुल्क: ₹<span class="field-compounding_amount"></span>/- | 
+            सकल राशि: ₹<span class="field-total_amount font-bold"></span>/-
+          </td>
+        </tr>
+      </table>
+
+      <div class="text-xs space-y-2 text-justify">
+        <p><b>1.)</b> यह कि, दिनांक <span class="field-inspection_date"></span> को दल द्वारा निरीक्षण के दौरान पाया गया कि आरोपी द्वारा बिना किसी वैध कनेक्शन के सीधी एल.टी. लाइन से तार जोड़कर कुल <b><span class="field-sanctioned_load"></span></b> भार का अनाधिकृत उपयोग किया जा रहा था।</p>
+        <p><b>2.)</b> मौके पर NVIS App के माध्यम से इलेक्ट्रॉनिक पंचनामा क्रमांक <b><span class="field-panchanama_no"></span></b> तैयार किया गया।</p>
+        <p><b>3.)</b> आरोपी को धारा 152 के तहत सूचना पत्र (क्रमांक <span class="field-notice_no"></span> दिनांक <span class="field-notice_date"></span>) प्रेषित किया गया, किन्तु राशि जमा नहीं की गई।</p>
+      </div>
+
+      <!-- Static Advocate Details -->
+      <div class="mt-8 flex justify-between text-xs">
+        <div>
+          <p>दिनांक: __/__/2026</p>
+          <p>स्थान: उज्जैन</p>
+        </div>
+        <div class="text-right">
+          <p class="font-bold">परिवादी द्वारा अधिवक्ता</p>
+          <p class="font-bold mt-4">श्रीमती अर्पिता रावल</p>
+          <p>विशेष लोक अभियोजक / पैनल अधिवक्ता</p>
+          <p>नामांकन क्रमांक: MP/838/2012</p>
+          <p>बड़नगर / उज्जैन (म.प्र.) | मो.: 8878977124</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
