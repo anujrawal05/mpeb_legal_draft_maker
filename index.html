@@ -5,10 +5,26 @@
   <title>Electricity Theft Case Drafting Generator</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts for perfect Hindi Devanagari rendering -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Noto Sans Devanagari', sans-serif; }
+    body { 
+      font-family: 'Noto Serif Devanagari', 'Noto Sans Devanagari', sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
     
+    /* Prevent syllable splitting in Hindi */
+    .page-legal, .page-a4, .page-legal *, .page-a4 * {
+      letter-spacing: normal !important;
+      word-spacing: normal !important;
+      word-break: keep-all !important;
+      overflow-wrap: normal !important;
+      white-space: normal;
+      text-justify: inter-word !important;
+      -webkit-font-feature-settings: "liga" on, "clig" on, "calt" on !important;
+      font-feature-settings: "liga" on, "clig" on, "calt" on !important;
+    }
+
     /* PDF-viewer styling for screen preview */
     @media screen {
       .no-print-bg {
@@ -37,6 +53,13 @@
       .no-print { display: none !important; }
       .no-print-bg { background-color: transparent !important; padding: 0 !important; margin: 0 !important; }
       
+      body.print-front-cover-only .page-a4 {
+        display: none !important;
+      }
+      body.print-case-documents-only .page-legal {
+        display: none !important;
+      }
+
       .page-legal, .page-a4 {
         page-break-after: always; 
         margin: 0 !important;
@@ -64,6 +87,29 @@
       border-collapse: collapse;
       padding: 4px 8px;
     }
+
+    /* Standardized typography scales */
+    .page-a4.parivad-page {
+      font-size: 12px !important;
+      line-height: 1.6 !important;
+    }
+    .page-a4.parivad-page .title-main {
+      font-size: 16px !important;
+    }
+    .page-a4.parivad-page .title-sub {
+      font-size: 14px !important;
+    }
+    
+    .page-legal, .page-a4:not(.parivad-page) {
+      font-size: 10px !important;
+      line-height: 1.5 !important;
+    }
+    .page-legal .title-main, .page-a4:not(.parivad-page) .title-main {
+      font-size: 14px !important;
+    }
+    .page-legal .title-sub, .page-a4:not(.parivad-page) .title-sub {
+      font-size: 12px !important;
+    }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-900 min-h-screen">
@@ -90,9 +136,12 @@
         <!-- Dynamically Populated Form Fields -->
       </div>
 
-      <div class="mt-6 flex gap-4">
-        <button onclick="generatePrintView()" class="bg-green-700 text-white px-6 py-2 rounded font-bold hover:bg-green-800">
-          Print / Save Full PDF Set (A4)
+      <div class="mt-6 flex flex-wrap gap-4">
+        <button onclick="printFrontCover()" class="bg-blue-700 text-white px-6 py-2.5 rounded font-bold hover:bg-blue-800 shadow transition">
+          Print Front Cover (Legal Size)
+        </button>
+        <button onclick="printCaseDocuments()" class="bg-green-700 text-white px-6 py-2.5 rounded font-bold hover:bg-green-800 shadow transition">
+          Print Case Documents (A4 Size)
         </button>
       </div>
     </div>
@@ -102,12 +151,12 @@
   <div id="documentOutput" class="hidden max-w-4xl mx-auto my-6 space-y-8 no-print-bg">
     
     <!-- DOCUMENT 1: Front Cover -->
-    <div class="page-legal text-black relative" style="padding: 20mm; font-family: 'Noto Sans Devanagari', sans-serif;">
-      <div class="text-center font-bold text-lg leading-snug">
+    <div class="page-legal text-black relative" style="padding: 20mm;">
+      <div class="text-center font-bold title-main leading-snug">
         माननीय न्यायालय विशेष न्यायाधीश महोदय (विद्युत अधिनियम)<br>
         एवं अतिरिक्त जिला एवं सत्र न्यायाधीश, बड़नगर, जिला उज्जैन (म.प्र.)
       </div>
-      <div class="text-center text-sm font-semibold mt-1">
+      <div class="text-center font-semibold mt-1">
         (विशेष न्यायालय, विद्युत अधिनियम, 2003 के अन्तर्गत)
       </div>
       
@@ -162,7 +211,7 @@
     </div>
 
     <!-- DOCUMENT 2: Computer Patrak (प्रारूप संख्या-2) -->
-    <div class="page-a4 text-black relative" style="padding: 10mm 15mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-a4 text-black relative" style="padding: 10mm 15mm;">
       <div class="text-center font-bold text-base">प्रारूप संख्या-2</div>
       <div class="text-center text-xs font-semibold">(अध्याय-1 अ नियम-3)</div>
       <div class="text-center font-bold text-lg underline mt-1">कम्प्यूटर-पत्रक</div>
@@ -249,7 +298,7 @@
     </div>
 
     <!-- DOCUMENT 3: Vakalatnama -->
-    <div class="page-a4 text-black relative" style="padding: 15mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-a4 text-black relative" style="padding: 15mm;">
       <div class="text-center font-bold text-lg underline">वकालतनामा</div>
       <div class="text-center text-xs font-semibold mt-1">(एडवोकेट एक्ट, 1961 के अधीन बनाए गए नियमों का नियम 4(1))</div>
 
@@ -330,7 +379,7 @@
     </div>
 
     <!-- DOCUMENT 4: Form 8 -->
-    <div class="page-a4 text-black relative" style="padding: 10mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-a4 text-black relative" style="padding: 10mm;">
       <div class="text-center font-bold text-sm">प्रारूप संख्या-8</div>
       <div class="text-center text-[10px] font-semibold">(अध्याय-4 नियम-52)</div>
       <div class="text-center font-bold text-sm mt-1">................................ (म.प्र.) के न्यायालय में</div>
@@ -403,7 +452,7 @@
 
     <!-- DOCUMENT 5: Criminal Complaint (विशेष आपराधिक परिवाद) -->
     <!-- Page 1 of Complaint -->
-    <div class="page-a4 text-black relative" style="padding: 20mm 15mm 20mm 25mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-a4 parivad-page text-black relative" style="padding: 20mm 15mm 20mm 25mm;">
       <div class="text-center font-bold text-base leading-snug">
         माननीय न्यायालय विशेष न्यायाधीश महोदय,<br>
         (अन्तर्गत विद्युत अधिनियम 2003) उज्जैन (म.प्र.)
@@ -471,7 +520,7 @@
     </div>
 
     <!-- Page 2 of Complaint -->
-    <div class="page-a4 text-black relative" style="padding: 20mm 15mm 20mm 25mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-a4 parivad-page text-black relative" style="padding: 20mm 15mm 20mm 25mm;">
       <div class="text-sm font-bold mb-4 underline">10. अपराध का विवरण :</div>
       <div class="text-xs space-y-4 text-justify leading-relaxed">
         <p class="font-bold">अपराध का विवरण निम्नानुसार है :-</p>
@@ -488,7 +537,7 @@
     </div>
 
     <!-- Page 3 of Complaint -->
-    <div class="page-a4 text-black relative" style="padding: 20mm 15mm 20mm 25mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-a4 parivad-page text-black relative" style="padding: 20mm 15mm 20mm 25mm;">
       <div class="text-xs space-y-4 text-justify leading-relaxed">
         <p>
           <b>IV.)</b> यह कि, आरोपीगण द्वारा अभियोगी वितरण कंपनी को आर्थिक क्षति कारित करने के बेईमानीपूर्ण आशय से विद्युत ऊर्जा की सीधी चोरी की गई है। आरोपीगण का कृत्य धारा 135 विद्युत अधिनियम 2003 के अंतर्गत दंडनीय होकर संज्ञेय तथा गैर-जमानतीय अपराध की श्रेणी में आता है।
@@ -524,7 +573,7 @@
     </div>
 
     <!-- Page 4 of Complaint -->
-    <div class="page-a4 text-black relative" style="padding: 20mm 15mm 20mm 25mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+    <div class="page-a4 parivad-page text-black relative" style="padding: 20mm 15mm 20mm 25mm;">
       <div class="text-center font-bold text-sm my-6">।। प्रार्थना ।।</div>
       <div class="text-xs text-justify leading-relaxed space-y-4">
         <p>

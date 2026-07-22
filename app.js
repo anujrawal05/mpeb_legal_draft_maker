@@ -161,7 +161,16 @@ function updateData() {
   }
 }
 
-function generatePrintView() {
+function printFrontCover() {
+  document.body.classList.add('print-front-cover-only');
+  document.body.classList.remove('print-case-documents-only');
+  document.getElementById('documentOutput').classList.remove('hidden');
+  window.print();
+}
+
+function printCaseDocuments() {
+  document.body.classList.add('print-case-documents-only');
+  document.body.classList.remove('print-front-cover-only');
   document.getElementById('documentOutput').classList.remove('hidden');
   window.print();
 }
