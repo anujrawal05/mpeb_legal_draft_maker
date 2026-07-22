@@ -576,7 +576,7 @@ function downloadDocx(docId) {
 <head>
   <meta charset="utf-8">
   <style>
-    \${marginStyle}
+    ${marginStyle}
     body {
       font-family: Mangal, 'Noto Sans Devanagari', Arial, sans-serif;
       font-size: 12pt;
@@ -604,7 +604,7 @@ function downloadDocx(docId) {
   </style>
 </head>
 <body>
-  \${htmlContent}
+  ${htmlContent}
 </body>
 </html>`;
 
@@ -617,7 +617,7 @@ function downloadDocx(docId) {
     if (accusedList.length > 0) {
       accusedSimpleName = accusedList[0].name.trim().replace(/\s+/g, '_');
     }
-    const filename = `\${docId}_\${accusedSimpleName}.docx`;
+    const filename = `${docId}_${accusedSimpleName}.docx`;
     saveAs(blob, filename);
 
   } catch (error) {
