@@ -1,20 +1,29 @@
 let extractedData = {};
 
 async function processDocument() {
-  const apiKey = "AQ.Ab8RN6LFJZ5zKugWI_o5na6bjw0ka4Q3_11hJsswBSMhZ8JItQ";
+  // Read key from window.GEMINI_API_KEY or fall back to window prompt
+  const apiKey = (typeof window.GEMINI_API_KEY !== 'undefined' && window.GEMINI_API_KEY)
+    ? window.GEMINI_API_KEY
+    : prompt("Enter your Gemini API Key (starts with AIzaSy):");
+
   const fileInput = document.getElementById('fileInput').files[0];
 
-  if (!apiKey) return alert("Please configure the Gemini API Key.");
-  if (!fileInput) return alert("Please upload the inspection PDF/image.");
+  if (!apiKey || (!apiKey.startsWith('AIzaSy') && !apiKey.startsWith('AQ.'))) {
+    return alert("Invalid Gemini API Key format.");
+  }
+  if (!fileInput) {
+    return alert("Please upload the inspection PDF or image.");
+  }
 
-  document.getElementById('processBtn').innerText = "Analyzing Document with AI...";
-  document.getElementById('processBtn').disabled = true;
+  const processBtn = document.getElementById('processBtn');
+  processBtn.innerText = "Analyzing Document with AI...";
+  processBtn.disabled = true;
 
   try {
     const base64Data = await convertFileToBase64(fileInput);
     const mimeType = fileInput.type || 'application/pdf';
 
-    const prompt = `
+    const promptText = `
       Extract the following electricity theft inspection details from this document into a valid JSON object:
       {
         "consumer_name": "Name of primary owner/consumer",
@@ -37,13 +46,16 @@ async function processDocument() {
       Respond ONLY with the raw JSON string. Do not include markdown code blocks.
     `;
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+    // FIX: Using v1beta endpoint instead of v1
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+    const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{
           parts: [
-            { text: prompt },
+            { text: promptText },
             { inline_data: { mime_type: mimeType, data: base64Data } }
           ]
         }]
@@ -51,24 +63,30 @@ async function processDocument() {
     });
 
     const result = await response.json();
+
     if (result.error) {
-      throw new Error(result.error.message || JSON.stringify(result.error));
+      throw new Error(`API Error (${result.error.code}): ${result.error.message}`);
     }
-    if (!result.candidates || !result.candidates[0]) {
-      throw new Error("Invalid response structure from Gemini API: " + JSON.stringify(result));
+
+    if (!result.candidates || !result.candidates[0] || !result.candidates[0].content) {
+      throw new Error("No response returned from the model. Check image clarity or safety blocks.");
     }
+
     const rawText = result.candidates[0].content.parts[0].text;
-    const cleanJson = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
-    
+
+    // Clean raw JSON formatting if wrapped in codeblocks
+    const cleanJson = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
+
     extractedData = JSON.parse(cleanJson);
     populateFormGrid(extractedData);
     document.getElementById('reviewSection').classList.remove('hidden');
 
   } catch (error) {
     alert("Extraction Failed: " + error.message);
+    console.error(error);
   } finally {
-    document.getElementById('processBtn').innerText = "Extract Data & Generate Drafts";
-    document.getElementById('processBtn').disabled = false;
+    processBtn.innerText = "Extract Data & Generate Drafts";
+    processBtn.disabled = false;
   }
 }
 
@@ -84,11 +102,11 @@ function convertFileToBase64(file) {
 function populateFormGrid(data) {
   const container = document.getElementById('formGrid');
   container.innerHTML = '';
-  
+
   for (const [key, value] of Object.entries(data)) {
     container.innerHTML += `
       <div>
-        <label class="block font-semibold capitalize text-xs text-gray-600">${key.replace('_', ' ')}:</label>
+        <label class="block font-semibold capitalize text-xs text-gray-600">${key.replace(/_/g, ' ')}:</label>
         <input type="text" data-key="${key}" value="${value || ''}" class="w-full p-1 border rounded text-sm edit-field" oninput="updateData()">
       </div>
     `;
@@ -102,7 +120,6 @@ function updateData() {
     extractedData[key] = input.value;
   });
 
-  // Inject updated fields into rendered HTML document
   for (const [key, value] of Object.entries(extractedData)) {
     document.querySelectorAll(`.field-${key}`).forEach(el => {
       el.innerText = value || 'N/A';
