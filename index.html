@@ -35,16 +35,9 @@
   <div class="no-print max-w-4xl mx-auto p-6 bg-white my-6 rounded-lg shadow-md">
     <h1 class="text-2xl font-bold mb-4 text-blue-900">M.P. West Zone Electricity Court Filing System</h1>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-      <div>
-        <label class="block font-semibold mb-1">1. Enter Google Gemini API Key (Free):</label>
-        <input type="password" id="apiKey" class="w-full p-2 border rounded" placeholder="AIzaSy...">
-        <p class="text-xs text-gray-500 mt-1">Get a free key at <a href="https://aistudio.google.com/" target="_blank" class="text-blue-600 underline">aistudio.google.com</a></p>
-      </div>
-      <div>
-        <label class="block font-semibold mb-1">2. Select Inspection Report (data.pdf / image):</label>
-        <input type="file" id="fileInput" accept="application/pdf,image/*" class="w-full p-1 border rounded">
-      </div>
+    <div class="mb-4">
+      <label class="block font-semibold mb-2">Select Inspection Report (data.pdf / image):</label>
+      <input type="file" id="fileInput" accept="application/pdf,image/*" class="w-full p-2 border rounded">
     </div>
 
     <button onclick="processDocument()" id="processBtn" class="w-full bg-blue-700 text-white py-2 rounded font-bold hover:bg-blue-800">

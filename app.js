@@ -1,17 +1,10 @@
 let extractedData = {};
 
-// Auto-fill API Key if configured in local config.js
-document.addEventListener('DOMContentLoaded', () => {
-  if (window.GEMINI_API_KEY) {
-    document.getElementById('apiKey').value = window.GEMINI_API_KEY;
-  }
-});
-
 async function processDocument() {
-  const apiKey = document.getElementById('apiKey').value.trim() || window.GEMINI_API_KEY;
+  const apiKey = window.GEMINI_API_KEY;
   const fileInput = document.getElementById('fileInput').files[0];
 
-  if (!apiKey) return alert("Please enter your Gemini API Key.");
+  if (!apiKey) return alert("API Key is missing. Please check config.js.");
   if (!fileInput) return alert("Please upload the inspection PDF/image.");
 
   document.getElementById('processBtn').innerText = "Analyzing Document with AI...";
