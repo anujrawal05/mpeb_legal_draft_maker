@@ -51,6 +51,12 @@ async function processDocument() {
     });
 
     const result = await response.json();
+    if (result.error) {
+      throw new Error(result.error.message || JSON.stringify(result.error));
+    }
+    if (!result.candidates || !result.candidates[0]) {
+      throw new Error("Invalid response structure from Gemini API: " + JSON.stringify(result));
+    }
     const rawText = result.candidates[0].content.parts[0].text;
     const cleanJson = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
     
