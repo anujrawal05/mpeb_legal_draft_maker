@@ -193,13 +193,70 @@
         <!-- Dynamically Populated Form Fields -->
       </div>
 
-      <div class="mt-6 flex flex-wrap gap-4">
-        <button onclick="printFrontCover()" class="bg-blue-700 text-white px-6 py-2.5 rounded font-bold hover:bg-blue-800 shadow transition">
-          Print Front Cover (Legal Size)
-        </button>
-        <button onclick="printCaseDocuments()" class="bg-green-700 text-white px-6 py-2.5 rounded font-bold hover:bg-green-800 shadow transition">
-          Print Case Documents (A4 Size)
-        </button>
+      <div class="border-t pt-4 mt-6">
+        <h3 class="font-bold text-sm text-gray-700 mb-4">Generate & Print Court-Ready Documents:</h3>
+        <div class="space-y-4">
+          <!-- Item 1: Front Cover -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-2">
+            <span class="font-semibold text-sm text-gray-800">1. Front Cover (Legal Size)</span>
+            <div class="flex gap-2 mt-2 sm:mt-0">
+              <button onclick="printSingleDoc('cover')" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded transition">
+                Print / Save PDF
+              </button>
+              <button onclick="downloadDocx('cover')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded transition">
+                Download Editable Word (.docx)
+              </button>
+            </div>
+          </div>
+          <!-- Item 2: Computer Sheet -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-2">
+            <span class="font-semibold text-sm text-gray-800">2. Computer Sheet (A4)</span>
+            <div class="flex gap-2 mt-2 sm:mt-0">
+              <button onclick="printSingleDoc('computer-sheet')" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded transition">
+                Print / Save PDF
+              </button>
+              <button onclick="downloadDocx('computer-sheet')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded transition">
+                Download Editable Word (.docx)
+              </button>
+            </div>
+          </div>
+          <!-- Item 3: Vakalatnama -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-2">
+            <span class="font-semibold text-sm text-gray-800">3. Vakalatnama (A4)</span>
+            <div class="flex gap-2 mt-2 sm:mt-0">
+              <button onclick="printSingleDoc('vakalatnama')" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded transition">
+                Print / Save PDF
+              </button>
+              <button onclick="downloadDocx('vakalatnama')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded transition">
+                Download Editable Word (.docx)
+              </button>
+            </div>
+          </div>
+          <!-- Item 4: Jaanch Suchi -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-2">
+            <span class="font-semibold text-sm text-gray-800">4. Jaanch Suchi / Checklist (A4)</span>
+            <div class="flex gap-2 mt-2 sm:mt-0">
+              <button onclick="printSingleDoc('jaanch-suchi')" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded transition">
+                Print / Save PDF
+              </button>
+              <button onclick="downloadDocx('jaanch-suchi')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded transition">
+                Download Editable Word (.docx)
+              </button>
+            </div>
+          </div>
+          <!-- Item 5: Main Parivad -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-2">
+            <span class="font-semibold text-sm text-gray-800">5. Main Criminal Complaint / Parivad (A4)</span>
+            <div class="flex gap-2 mt-2 sm:mt-0">
+              <button onclick="printSingleDoc('parivad')" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded transition">
+                Print / Save PDF
+              </button>
+              <button onclick="downloadDocx('parivad')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded transition">
+                Download Editable Word (.docx)
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
