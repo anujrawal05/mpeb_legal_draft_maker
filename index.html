@@ -202,18 +202,8 @@
       <div class="text-center font-bold my-6 text-sm">- विरुद्ध -</div>
 
       <div>
-        <p class="font-bold text-sm underline">अभियुक्त (आरोपीगण):</p>
-        <div class="pl-6 mt-2 text-sm space-y-3 leading-relaxed">
-          <p>
-            <span class="font-bold">1. <span class="field-consumer_name"></span> <span class="field-consumer_father_name"></span></span> (भवन स्वामी / उपभोक्ता)<br>
-            पता: ग्राम <span class="field-village font-semibold"></span>, <span class="field-police_station"></span>, तहसील बड़नगर, जिला उज्जैन (म.प्र.)
-          </p>
-          <p>
-            <span class="font-bold">2. <span class="field-user_name"></span> <span class="field-user_father_name"></span></span>, उम्र <span class="field-user_age font-semibold"></span> वर्ष (उपयोगकर्ता)<br>
-            पता: ग्राम <span class="field-village font-semibold"></span>, <span class="field-police_station"></span>, तहसील बड़नगर, जिला उज्जैन (म.प्र.)<br>
-            मोबाईल नंबर: <span class="field-mobile font-semibold"></span>
-          </p>
-        </div>
+        <p class="font-bold text-sm underline">अभियुक्त (<span class="grammar-accused-term">आरोपीगण</span>):</p>
+        <div id="accused-list-cover" class="pl-6 mt-2 text-sm space-y-3 leading-relaxed"></div>
       </div>
 
       <div class="my-6 border-2 border-black p-4 text-center bg-gray-50 rounded">
@@ -255,18 +245,8 @@
           </td>
         </tr>
         <tr>
-          <td class="font-bold py-3">2. अभियुक्त / अभियोजन प्रतिवादी अनावेदक</td>
-          <td class="py-3 leading-relaxed space-y-2">
-            <p>
-              1. <span class="field-consumer_name font-bold"></span> <span class="field-consumer_father_name font-bold"></span> (भवन स्वामी / उपभोक्ता)<br>
-              पता-ग्राम <span class="field-village"></span>, <span class="field-police_station"></span>, तह. बड़नगर, जिला उज्जैन
-            </p>
-            <p>
-              2. <span class="field-user_name font-bold"></span> <span class="field-user_father_name font-bold"></span>, उम्र <span class="field-user_age"></span> वर्ष (उपयोगकर्ता)<br>
-              पता-ग्राम <span class="field-village"></span>, <span class="field-police_station"></span>, तह. बड़नगर, जिला उज्जैन<br>
-              मोबाईल नंबर-<span class="field-mobile"></span>
-            </p>
-          </td>
+          <td class="font-bold py-3"><span class="grammar-accused-title-label">2. अभियुक्त / अनावेदक का विवरण</span></td>
+          <td id="accused-list-computer-sheet" class="py-3 leading-relaxed space-y-2"></td>
         </tr>
         <tr>
           <td class="font-bold py-2">3. प्रस्तुति व पंजीकरण दिनांक</td>
@@ -435,14 +415,10 @@
           </td>
         </tr>
         <tr>
-          <td class="font-bold">2. आरोपी / उपयोगकर्ता का नाम व पताः</td>
+          <td class="font-bold"><span class="grammar-accused-title-label">2. आरोपी का नाम व पताः</span></td>
           <td>
-            1. <span class="field-consumer_name font-bold"></span> <span class="field-consumer_father_name font-bold"></span> (भवन स्वामी / उपभोक्ता)<br>
-            पता - ग्राम <span class="field-village"></span>, <span class="field-police_station"></span>, तहसील बड़नगर, जिला उज्जैन (म.प्र.)<br><br>
-            2. <span class="field-user_name font-bold"></span> <span class="field-user_father_name font-bold"></span>, उम्र <span class="field-user_age font-semibold"></span> वर्ष (उपयोगकर्ता)<br>
-            पता - ग्राम <span class="field-village"></span>, <span class="field-police_station"></span>, तहसील बड़नगर, जिला उज्जैन (म.प्र.)<br>
-            मोबाईल नंबर- <span class="field-mobile font-semibold"></span>
-            <div class="text-right font-bold mt-1">--------आरोपीगण</div>
+            <div id="accused-list-parivad" class="space-y-3"></div>
+            <div class="text-right font-bold mt-1"><span class="grammar-accused-label-right">--------आरोपी</span></div>
           </td>
         </tr>
         <tr>
@@ -482,7 +458,7 @@
       <div class="text-xs space-y-4 text-justify leading-relaxed">
         <p class="font-bold">अपराध का विवरण निम्नानुसार है :-</p>
         <p>
-          <b>I.)</b> यह कि, उपरोक्त उल्लेखित अपराध दिनांक <span class="field-inspection_date"></span> को समय लगभग <span class="field-inspection_time"></span> पर म.प्र.पश्चिम क्षेत्र विद्युत वितरण कंपनी लिमिटेड, संभाग बड़नगर (जिसे आगे अभियोगी कंपनी संबोधित किया गया है) का निरीक्षण दल, जिसके सदस्य परिवाद पत्र के कॉलम नंबर 8 में नामित गवाह क्रमांक 1 लगायत 3 हैं, अभियोगी कंपनी के विद्युत कनेक्शनों के आकस्मिक निरीक्षण हेतु आरोपी / उपयोगकर्ता के परिसर ग्राम <span class="field-village"></span> पर पहुँचा तथा मौका निरीक्षण किया। मौके पर पाया गया कि अपराधग्रस्त परिसर पर आरोपी का कोई वैधानिक विद्युत कनेक्शन विद्यमान नहीं है तथा आरोपीगण द्वारा एल.टी. लाइन से सीधे अवैध रूप से तार जोड़कर अपने भवन में विभिन्न विद्युत उपकरण (<span class="field-connected_load_details font-semibold"></span>) चलाकर कुल <b><span class="field-sanctioned_load font-bold"></span></b> भार का अनाधिकृत रूप से उपयोग करके विद्युत ऊर्जा का बेईमानीपूर्वक अवैध उपयोग व चोरी की जा रही है। मौके पर आरोपी <span class="field-consumer_name"></span> का पुत्र <span class="field-user_name"></span> आरोपी के प्रतिनिधि के रूप में उपस्थित मिला। आरोपी के प्रतिनिधि की उपस्थिति में निरीक्षण कार्यवाही संपादित की गई। आरोपी के परिसर पर कुल <span class="field-sanctioned_load font-bold"></span> का विद्युत भार अवैधानिक रूप से उपयोग में चालू पाया गया।
+          <b>I.)</b> यह कि, उपरोक्त उल्लेखित अपराध दिनांक <span class="field-inspection_date"></span> को समय लगभग <span class="field-inspection_time"></span> पर म.प्र.पश्चिम क्षेत्र विद्युत वितरण कंपनी लिमिटेड, संभाग बड़नगर (जिसे आगे अभियोगी कंपनी संबोधित किया गया है) का निरीक्षण दल, जिसके सदस्य परिवाद पत्र के कॉलम नंबर 8 में नामित गवाह क्रमांक 1 लगायत 3 हैं, अभियोगी कंपनी के विद्युत कनेक्शनों के आकस्मिक निरीक्षण हेतु आरोपी / उपयोगकर्ता के परिसर ग्राम <span class="field-village"></span> पर पहुँचा तथा मौका निरीक्षण किया। मौके पर पाया गया कि अपराधग्रस्त परिसर पर आरोपी का कोई वैधानिक विद्युत कनेक्शन विद्यमान नहीं है तथा <span class="grammar-accused-term">आरोपीगण</span> द्वारा एल.टी. लाइन से सीधे अवैध रूप से तार जोड़कर अपने भवन में विभिन्न विद्युत उपकरण (<span class="field-connected_load_details font-semibold"></span>) चलाकर कुल <b><span class="field-sanctioned_load font-bold"></span></b> भार का अनाधिकृत रूप से उपयोग करके विद्युत ऊर्जा का बेईमानीपूर्वक अवैध उपयोग व चोरी की जा रही है। <span id="presence-narrative-block"></span> आरोपी के परिसर पर कुल <span class="field-sanctioned_load font-bold"></span> का विद्युत भार अवैधानिक रूप से उपयोग में चालू पाया गया।
         </p>
         <p>
           <b>II.)</b> यह कि, निरीक्षणकर्ता अधिकारी द्वारा निरीक्षण के पश्चात् मौके पर ही विधिवत मौका निरीक्षण का New Vigilance Information System जिसे NVIS App कहा जाता है, पर मोबाईल के माध्यम से इलेक्ट्रॉनिक रूप में पंचनामा (क्रमांक <span class="field-panchanama_no font-bold"></span>) तैयार करके तथा संयोजित भार को उपकरणों की आदर्श भार क्षमता एवं प्रकार अनुसार पंचनामे पर अंकित करके आरोपी के प्रतिनिधि को पढ़कर सुनाया व दिखाया गया। तत्पश्चात पंचनामे पर परिसर स्वामी की ओर से आरोपी के प्रतिनिधि द्वारा स्वेच्छा से अपने डिजिटल/हस्ताक्षर किए गए तथा अभियोगी कंपनी की ओर से निरीक्षणकर्ता की हैसियत से निरीक्षणकर्ता अधिकारी एवं दल सदस्यों द्वारा यथास्थान अपने-अपने हस्ताक्षर किए गए। इसके साथ ही मौके का नजरी नक्शा (उत्तर: मकान, दक्षिण: मकान, पूर्व: रास्ता, पश्चिम: रास्ता) एवं गूगल मैप लोकेशन चार्ट भी विधिवत संलग्न किया गया।
@@ -491,7 +467,7 @@
           <b>III.)</b> यह कि, आरोपी द्वारा अवैधानिक रूप से उपयोग की जा रही विद्युत ऊर्जा का निर्धारण, म.प्र. विद्युत नियामक आयोग द्वारा जारी टैरिफ दरों के अनुसार किया जाकर निर्धारण की सूचना तथा सुनवाई का अवसर देने के आशय से आरोपी के सही पते पर पंचनामे का paper प्रिंटआउट, अंतिम निर्धारण आदेश की प्रति (कुल आकलित खपत <b><span class="field-total_consumption_units font-bold"></span></b> यूनिट हेतु निर्धारण राशि <b>₹<span class="field-assessment_amount font-bold"></span>/-</b>) एवं धारा 152 का सूचना पत्र (क्रमांक <span class="field-notice_no font-bold"></span> दिनांक <span class="field-notice_date"></span>) स्पीड पोस्ट (रसीद क्र. <span class="field-speed_post_no font-semibold"></span>) द्वारा प्रेषित / तामील किए गए, जिसके द्वारा निर्धारित राशि एवं शमन शुल्क रुपये <b>₹<span class="field-compounding_amount"></span>/-</b> संदाय करके अपराध के शमन का आरोपी को अवसर प्रदान किया गया, किन्तु आरोपी / उपयोगकर्ता ने उक्त निर्धारित राशि व शमन शुल्क जमा नहीं किए और न ही अपनी ओर से इस विषयक कोई प्रतिवाद प्रस्तुत किया, इसलिए यह परिवाद पत्र माननीय न्यायालय के समक्ष प्रस्तुत किया जाना आवश्यक हुआ है।
         </p>
         <p>
-          <b>IV.)</b> यह कि, आरोपीगण द्वारा अभियोगी वितरण कंपनी को आर्थिक क्षति कारित करने के बेईमानीपूर्ण आशय से विद्युत ऊर्जा की सीधी चोरी की गई है। आरोपीगण का कृत्य धारा 135 विद्युत अधिनियम 2003 के अंतर्गत दंडनीय होकर संज्ञेय तथा गैर-जमानतीय अपराध की श्रेणी में आता है।
+          <b>IV.)</b> यह कि, <span class="grammar-accused-term">आरोपीगण</span> द्वारा अभियोगी वितरण कंपनी को आर्थिक क्षति कारित करने के बेईमानीपूर्ण आशय से विद्युत ऊर्जा की सीधी चोरी की गई है। <span class="grammar-possessive-term">आरोपीगण का</span> कृत्य धारा 135 विद्युत अधिनियम 2003 के अंतर्गत दंडनीय होकर संज्ञेय तथा गैर-जमानतीय अपराध की श्रेणी में आता है।
         </p>
         <p>
           <b>11.)</b> विद्युत ऊर्जा की चोरी से हुई आर्थिक क्षति : रुपये <b>₹<span class="field-assessment_amount font-bold"></span>/-</b> एवं शमन शुल्क रुपये <b>₹<span class="field-compounding_amount font-bold"></span>/-</b> सकल राशि रुपये <b>₹<span class="field-total_amount font-bold"></span>/-</b> प्रेषित की गई है।
@@ -525,7 +501,7 @@
       <div class="text-center font-bold text-sm my-6">।। प्रार्थना ।।</div>
       <div class="text-xs text-justify leading-relaxed space-y-4">
         <p>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;अतः परिवाद पत्र प्रस्तुत कर माननीय महोदय से सादर निवेदन है कि आरोपीगण के विरुद्ध प्रकरण दर्ज कर विद्युत अधिनियम 2003 के अंतर्गत आरोपीगण को उनके द्वारा किए गए अपराध के लिए उपबंधित अधिकतम दंड एवं जुर्माने से दंडित किया जावे। अभियोगी वितरण कंपनी को हुई विद्युत क्षति की राशि रुपये <b>₹<span class="field-assessment_amount font-bold"></span>/-</b> एवं शमन शुल्क रुपये <b>₹<span class="field-compounding_amount font-bold"></span>/-</b> (सकल राशि रुपये <b>₹<span class="field-total_amount font-bold"></span>/-</b>) व परिवाद पत्र प्रस्तुत करने में हुआ समस्त व्यय सहित अन्य कोई सहायता जो माननीय न्यायालय को अभियोगी वितरण कंपनी के हित में उचित लगे, आरोपीगण से दिलाई जावे। यही विनय है। इति।
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;अतः परिवाद पत्र प्रस्तुत कर माननीय महोदय से सादर निवेदन है कि <span class="grammar-accused-term">आरोपीगण</span> के विरुद्ध प्रकरण दर्ज कर विद्युत अधिनियम 2003 के अंतर्गत <span class="grammar-accused-term">आरोपीगण</span> को <span class="grammar-possessive-pronoun">उनके</span> द्वारा किए गए अपराध के लिए उपबंधित अधिकतम दंड एवं जुर्माने से दंडित किया जावे। अभियोगी वितरण कंपनी को हुई विद्युत क्षति की राशि रुपये <b>₹<span class="field-assessment_amount font-bold"></span>/-</b> एवं शमन शुल्क रुपये <b>₹<span class="field-compounding_amount font-bold"></span>/-</b> (सकल राशि रुपये <b>₹<span class="field-total_amount font-bold"></span>/-</b>) व परिवाद पत्र प्रस्तुत करने में हुआ समस्त व्यय सहित अन्य कोई सहायता जो माननीय न्यायालय को अभियोगी वितरण कंपनी के हित में उचित लगे, <span class="grammar-from-term">आरोपीगण से</span> दिलाई जावे। यही विनय है। इति।
         </p>
       </div>
 
