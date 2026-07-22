@@ -99,6 +99,8 @@ async function processDocument() {
       officer_name: "",
       officer_father_name: "",
       officer_age: "",
+      officer_email: "",
+      officer_mobile: "",
       distribution_center: "",
       sanctioned_load: "",
       connected_load_details: "",

@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body { 
-      font-family: 'Noto Serif Devanagari', 'Noto Sans Devanagari', sans-serif;
+      font-family: 'Noto Sans Devanagari', sans-serif;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
     }
@@ -74,9 +74,15 @@
         height: 355.6mm !important;
       }
 
-      .page-a4 {
+      .page-a4:not(.parivad-page) {
         width: 210mm !important;
         height: 297mm !important;
+      }
+
+      .page-a4.parivad-page {
+        width: 210mm !important;
+        height: auto !important;
+        min-height: 297mm !important;
       }
       
       body { background: #fff; color: #000; }
@@ -85,30 +91,46 @@
     .legal-table, .legal-table th, .legal-table td {
       border: 1px solid black;
       border-collapse: collapse;
-      padding: 4px 8px;
+      padding: 3px 6px;
     }
 
     /* Standardized typography scales */
     .page-a4.parivad-page {
-      font-size: 12px !important;
-      line-height: 1.6 !important;
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 12pt !important;
+      line-height: 1.4 !important;
+      color: #000000 !important;
     }
     .page-a4.parivad-page .title-main {
-      font-size: 16px !important;
+      font-size: 14pt !important;
+      font-weight: bold !important;
     }
     .page-a4.parivad-page .title-sub {
-      font-size: 14px !important;
+      font-size: 12pt !important;
+      font-weight: bold !important;
+    }
+    .page-a4.parivad-page td, .page-a4.parivad-page th {
+      font-size: 10pt !important;
+      padding: 3px 6px !important;
     }
     
     .page-legal, .page-a4:not(.parivad-page) {
-      font-size: 10px !important;
-      line-height: 1.5 !important;
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 10pt !important;
+      line-height: 1.3 !important;
+      color: #000000 !important;
     }
     .page-legal .title-main, .page-a4:not(.parivad-page) .title-main {
-      font-size: 14px !important;
+      font-size: 12pt !important;
+      font-weight: bold !important;
     }
     .page-legal .title-sub, .page-a4:not(.parivad-page) .title-sub {
-      font-size: 12px !important;
+      font-size: 11pt !important;
+      font-weight: bold !important;
+    }
+    .page-legal td, .page-legal th, .page-a4:not(.parivad-page) td, .page-a4:not(.parivad-page) th {
+      font-size: 10pt !important;
+      padding: 3px 6px !important;
     }
   </style>
 </head>
@@ -194,11 +216,11 @@
         </div>
       </div>
 
-      <div class="my-10 border-2 border-black p-4 text-center bg-gray-50 rounded">
+      <div class="my-6 border-2 border-black p-4 text-center bg-gray-50 rounded">
         <span class="font-bold text-base">विशेष परिवाद पत्र अन्तर्गत धारा 135, विद्युत अधिनियम, 2003</span>
       </div>
 
-      <div class="absolute" style="bottom: 20mm; right: 20mm; text-align: right;">
+      <div class="mt-6 text-left">
         <p class="font-bold underline">परिवादी की ओर से अधिवक्ता:</p>
         <div class="mt-2 font-bold leading-relaxed">
           <p class="text-base text-blue-900">श्रीमती अर्पिता रावल</p>
@@ -344,8 +366,8 @@
             <tr>
               <td class="py-4 font-semibold"><span class="field-officer_name"></span></td>
               <td class="py-4">वितरण केंद्र <span class="field-distribution_center"></span>, संभाग बड़नगर</td>
-              <td class="py-4">arpitarawal1983@gmail.com</td>
-              <td class="py-4">8878977124</td>
+              <td class="py-4"></td>
+              <td class="py-4"></td>
               <td class="py-4 font-semibold text-center">परिवादी</td>
               <td class="py-4"></td>
             </tr>
@@ -389,71 +411,9 @@
         <div>प्रकरण का प्रकार : <span class="font-bold">विशेष विद्युत परिवाद</span></div>
         <div>*क्र. _______________ / 2026 &nbsp;&nbsp;&nbsp;&nbsp; *रा.जे. / एस.जे. / सी.जे.एम. / जे.एम.</div>
         <div>अभियोगी : <span class="font-bold">म.प्र.प.क्षे.वि.वि.कं.लि.</span> (केवल प्रथम नाम)</div>
-        <div>मुख्य अधिवक्ता : <span class="font-bold">श्रीमती अर्पिता रावल एडवोकेट</span> (पंजीयन क्र. MP/838/2012)</div>
-        <div>अभियुक्त : <span class="field-consumer_name font-bold"></span> एवं अन्य (केवल प्रथम नाम)</div>
-        <div>सहायक अधिवक्ता : <span class="font-bold">N/A</span></div>
-      </div>
-
-      <table class="w-full legal-table text-[9px]">
-        <thead>
-          <tr class="bg-gray-100 font-bold text-center">
-            <th class="p-1 w-[5%]">क्र.</th>
-            <th class="p-1 w-[70%]">विवरण</th>
-            <th class="p-1 w-[8%]">हाँ</th>
-            <th class="p-1 w-[8%]">नहीं</th>
-            <th class="p-1 w-[9%]">लागू नहीं (N.A.)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td class="text-center">1</td><td>क्या प्रारूप क्रमांक 2 में कंप्यूटर-पत्रक संलग्न है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">2</td><td>क्या परिवाद अपराध कारित करने में प्रत्येक अभियुक्त की विशिष्ट भूमिका के संक्षिप्त वर्णन के साथ स्पष्ट रूप से लिखा गया है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">3</td><td>क्या प्रत्येक अभियुक्त का नाम, पिता का नाम, आयु, जाति एवं पता शीर्षक में उचित रूप से लिखा गया है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">4</td><td>क्या परिवाद में विधि के प्रावधान जिसके अधीन परिवाद फाइल किया गया है, को स्पष्ट रूप से लिखा गया है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">5</td><td>क्या कोई मौखिक / लिखित प्रथम सूचना रिपोर्ट / इत्तिला किसी पुलिस प्राधिकारी को की गई है? यदि हाँ तो पुलिस अधिकारी का नाम, पुलिस स्टेशन, प्राधिकारी द्वारा इत्तिला की तारीख व की गई कार्यवाही का विवरण।</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">6</td><td>क्या मामला पूर्व से लंबित / संस्थित / तयशुदा मामले से संबंधित / आच्छादित है? यदि हाँ तो क्या कार्यवाही की गई उसका विवरण कीजिये।</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">7</td><td>क्या परिवाद में साक्षियों (गवाहों) की विस्तृत सूची संलग्न है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">8</td><td>क्या परिवाद के साथ जब्तशुदा सामग्री / संपत्ति का विवरण व ज़ब्ती पत्रक संलग्न है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">9</td><td>क्या अपराध घटित होने की दिनांक, समय एवं सटीक घटना स्थल का विवरण परिवाद में अंकित है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">10</td><td>क्या परिवादी लोक सेवक है एवं परिवाद प्रस्तुत करने हेतु सक्षम प्राधिकार पत्र / गजट अधिसूचना संलग्न है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">11</td><td>क्या नियमानुसार वकालतनामा संलग्न है एवं उस पर आवश्यक एडवोकेट वेलफेयर टिकट संलग्न है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">12</td><td>क्या परिवाद पत्र पर उचित न्याय शुल्क (कोर्ट फीस) संदत्त किया गया है अथवा लोक सेवक होने से छूट प्राप्त है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">13</td><td>क्या धारा 152 विद्युत अधिनियम के तहत शमन (Compounding) सूचना पत्र एवं डाक तामीली की रसीद संलग्न है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">14</td><td>क्या विद्युत चोरी से कारित क्षति राशि (₹<span class="field-assessment_amount font-bold"></span>/-) एवं निर्धारण बिल की प्रति संलग्न है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">15</td><td>क्या परिवाद क्षेत्राधिकार वाले सक्षम न्यायालय के समक्ष प्रस्तुत किया गया है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">16</td><td>क्या परिवाद पत्र कानून द्वारा निर्धारित परिसीमा अवधि (Limitation Period) के भीतर प्रस्तुत है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">17</td><td>क्या परिवादी द्वारा परिवाद पत्र के अंत में नियमानुसार सत्यनिष्ठा से सत्यापन (Verification) अंकित किया गया है ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">18</td><td>क्या अभियुक्त को जारी होने वाले समन/प्रोसेस हेतु परिवाद एवं दस्तावेजों की आवश्यक प्रतियां प्रस्तुत हैं ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">19</td><td>क्या मौका नक़्शा व स्थल की स्थिति प्रमाणित करने संबंधी दस्तावेज़ संलग्न हैं ?</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">20</td><td>प्रकरण प्रस्तुत करने की दिनांक : ______ / ______ / 2026</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">21</td><td>अभियुक्त की सामाजिक श्रेणी: [ ] सामान्य / [ ] अन्य पिछड़ा वर्ग (OBC) / [ ] अनु. जाति / [ ] अनु. जनजाति</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">22</td><td>अभियुक्त की अनुमानित वार्षिक आय: [ ] 01 लाख से कम / [ ] 01 लाख से 03 लाख / [ ] 03 लाख से अधिक</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">23</td><td>अभियुक्त का लिंग एवं अनुमानित आयु: [ ] पुरुष / [ ] महिला / [ ] अन्य | उम्र करीब ..... वर्ष</td><td></td><td></td><td></td></tr>
-          <tr><td class="text-center">24</td><td>अभियुक्त का व्यवसाय / आजीविका : [ ] कृषि / [ ] मजदूरी / [ ] व्यापार / [ ] अन्य</td><td></td><td></td><td></td></tr>
-        </tbody>
-      </table>
-
-      <div class="mt-4 flex justify-between text-[10px]">
-        <div>
-          <p>स्थान : बड़नगर / उज्जैन</p>
-          <p>दिनांक : __________________</p>
-        </div>
-        <div class="text-right">
-          <p class="font-bold">प्रकरण प्रस्तुत करने वाले अधिवक्ता</p>
-          <p class="font-bold">का नाम : श्रीमती अर्पिता रावल एड. MP/838/2012</p>
-          <p>हस्ताक्षर : _________________________________</p>
-          <p>मोबाईल नं. : 8878977124</p>
-          <p>ई-मेल आईडी. : arpitarawal1983@gmail.com</p>
-        </div>
-      </div>
-      <div class="absolute bottom-2 left-10 text-[9px] text-gray-500">
-        *क्रमांक व न्यायालय का नाम कार्यालय द्वारा भरा जावेगा।
-      </div>
-    </div>
-
-    <!-- DOCUMENT 5: Criminal Complaint (विशेष आपराधिक परिवाद) -->
-    <!-- Page 1 of Complaint -->
-    <div class="page-a4 parivad-page text-black relative" style="padding: 20mm 15mm 20mm 25mm;">
-      <div class="text-center font-bold text-base leading-snug">
+        <div>मुख्य अधिवक्ता : <span class="font-bold">श्रीमती अर्पिता रावल एडवोकेट</span> (पंजीयन क    <!-- DOCUMENT 5: Criminal Complaint (विशेष आपराधिक परिवाद) -->
+    <div class="page-a4 parivad-page text-black relative" style="padding: 20mm 15mm 20mm 25mm; height: auto !important; min-height: 297mm; page-break-after: always;">
+      <div class="text-center font-bold title-main leading-snug">
         माननीय न्यायालय विशेष न्यायाधीश महोदय,<br>
         (अन्तर्गत विद्युत अधिनियम 2003) उज्जैन (म.प्र.)
       </div>
@@ -517,11 +477,8 @@
           <td>निरंक (NA)</td>
         </tr>
       </table>
-    </div>
 
-    <!-- Page 2 of Complaint -->
-    <div class="page-a4 parivad-page text-black relative" style="padding: 20mm 15mm 20mm 25mm;">
-      <div class="text-sm font-bold mb-4 underline">10. अपराध का विवरण :</div>
+      <div class="text-sm font-bold my-4 underline">10. अपराध का विवरण :</div>
       <div class="text-xs space-y-4 text-justify leading-relaxed">
         <p class="font-bold">अपराध का विवरण निम्नानुसार है :-</p>
         <p>
@@ -531,14 +488,8 @@
           <b>II.)</b> यह कि, निरीक्षणकर्ता अधिकारी द्वारा निरीक्षण के पश्चात् मौके पर ही विधिवत मौका निरीक्षण का New Vigilance Information System जिसे NVIS App कहा जाता है, पर मोबाईल के माध्यम से इलेक्ट्रॉनिक रूप में पंचनामा (क्रमांक <span class="field-panchanama_no font-bold"></span>) तैयार करके तथा संयोजित भार को उपकरणों की आदर्श भार क्षमता एवं प्रकार अनुसार पंचनामे पर अंकित करके आरोपी के प्रतिनिधि को पढ़कर सुनाया व दिखाया गया। तत्पश्चात पंचनामे पर परिसर स्वामी की ओर से आरोपी के प्रतिनिधि द्वारा स्वेच्छा से अपने डिजिटल/हस्ताक्षर किए गए तथा अभियोगी कंपनी की ओर से निरीक्षणकर्ता की हैसियत से निरीक्षणकर्ता अधिकारी एवं दल सदस्यों द्वारा यथास्थान अपने-अपने हस्ताक्षर किए गए। इसके साथ ही मौके का नजरी नक्शा (उत्तर: मकान, दक्षिण: मकान, पूर्व: रास्ता, पश्चिम: रास्ता) एवं गूगल मैप लोकेशन चार्ट भी विधिवत संलग्न किया गया।
         </p>
         <p>
-          <b>III.)</b> यह कि, आरोपी द्वारा अवैधानिक रूप से उपयोग की जा रही विद्युत ऊर्जा का निर्धारण, म.प्र. विद्युत नियामक आयोग द्वारा जारी टैरिफ दरों के अनुसार किया जाकर निर्धारण की सूचना तथा सुनवाई का अवसर देने के आशय से आरोपी के सही पते पर पंचनामे का पेपर प्रिंटआउट, अंतिम निर्धारण आदेश की प्रति (कुल आकलित खपत <b><span class="field-total_consumption_units font-bold"></span></b> यूनिट हेतु निर्धारण राशि <b>₹<span class="field-assessment_amount font-bold"></span>/-</b>) एवं धारा 152 का सूचना पत्र (क्रमांक <span class="field-notice_no font-bold"></span> दिनांक <span class="field-notice_date"></span>) स्पीड पोस्ट (रसीद क्र. <span class="field-speed_post_no font-semibold"></span>) द्वारा प्रेषित / तामील किए गए, जिसके द्वारा निर्धारित राशि एवं शमन शुल्क रुपये <b>₹<span class="field-compounding_amount"></span>/-</b> संदाय करके अपराध के शमन का आरोपी को अवसर प्रदान किया गया, किन्तु आरोपी / उपयोगकर्ता ने उक्त निर्धारित राशि व शमन शुल्क जमा नहीं किए और न ही अपनी ओर से इस विषयक कोई प्रतिवाद प्रस्तुत किया, इसलिए यह परिवाद पत्र माननीय न्यायालय के समक्ष प्रस्तुत किया जाना आवश्यक हुआ है।
+          <b>III.)</b> यह कि, आरोपी द्वारा अवैधानिक रूप से उपयोग की जा रही विद्युत ऊर्जा का निर्धारण, म.प्र. विद्युत नियामक आयोग द्वारा जारी टैरिफ दरों के अनुसार किया जाकर निर्धारण की सूचना तथा सुनवाई का अवसर देने के आशय से आरोपी के सही पते पर पंचनामे का paper प्रिंटआउट, अंतिम निर्धारण आदेश की प्रति (कुल आकलित खपत <b><span class="field-total_consumption_units font-bold"></span></b> यूनिट हेतु निर्धारण राशि <b>₹<span class="field-assessment_amount font-bold"></span>/-</b>) एवं धारा 152 का सूचना पत्र (क्रमांक <span class="field-notice_no font-bold"></span> दिनांक <span class="field-notice_date"></span>) स्पीड पोस्ट (रसीद क्र. <span class="field-speed_post_no font-semibold"></span>) द्वारा प्रेषित / तामील किए गए, जिसके द्वारा निर्धारित राशि एवं शमन शुल्क रुपये <b>₹<span class="field-compounding_amount"></span>/-</b> संदाय करके अपराध के शमन का आरोपी को अवसर प्रदान किया गया, किन्तु आरोपी / उपयोगकर्ता ने उक्त निर्धारित राशि व शमन शुल्क जमा नहीं किए और न ही अपनी ओर से इस विषयक कोई प्रतिवाद प्रस्तुत किया, इसलिए यह परिवाद पत्र माननीय न्यायालय के समक्ष प्रस्तुत किया जाना आवश्यक हुआ है।
         </p>
-      </div>
-    </div>
-
-    <!-- Page 3 of Complaint -->
-    <div class="page-a4 parivad-page text-black relative" style="padding: 20mm 15mm 20mm 25mm;">
-      <div class="text-xs space-y-4 text-justify leading-relaxed">
         <p>
           <b>IV.)</b> यह कि, आरोपीगण द्वारा अभियोगी वितरण कंपनी को आर्थिक क्षति कारित करने के बेईमानीपूर्ण आशय से विद्युत ऊर्जा की सीधी चोरी की गई है। आरोपीगण का कृत्य धारा 135 विद्युत अधिनियम 2003 के अंतर्गत दंडनीय होकर संज्ञेय तथा गैर-जमानतीय अपराध की श्रेणी में आता है।
         </p>
@@ -564,16 +515,13 @@
           <b>15.) परिवाद पत्र प्रस्तुत करने संबंधी प्राधिकार :</b> परिवादी लोक सेवक होकर म.प्र.पश्चिम क्षेत्र विद्युत वितरण कंपनी लिमिटेड, <span class="field-distribution_center font-semibold"></span> वितरण केंद्र पर बतौर कनिष्ठ यंत्री पदस्थ है तथा म.प्र. गजट नोटिफिकेशन के अनुसरण में अभियोगी कंपनी की ओर से माननीय विशेष न्यायालय के समक्ष परिवाद प्रस्तुत करने हेतु सक्षम अधिकारी घोषित है।
         </p>
         <p>
-          <b>16.) NVIS App द्वारा तैयार पंचनामें की साक्ष्य में ग्राह्यता :</b> प्रस्तुत पंचनामा सूचना एवं प्रौद्योगिकी विभाग द्वारा तैयार किए गए New Vigilance Information System जिसे NVIS App कहा जाता है, के माध्यम से इलेक्ट्रॉनिक रूप में तैयार किया गया है। उक्त पंचनामा इलेक्ट्रॉनिक अभिलेख में अंतर्विष्ट सूचना होकर इलेक्ट्रॉनिक दस्तावेज के पेपर प्रिंट के रूप में साक्ष्य में पूर्णतः ग्राह्य है।
+          <b>16.) NVIS App द्वारा तैयार पंचनामें की साक्ष्य में ग्राह्यता :</b> प्रस्तुत पंचनामा सूचना एवं प्रौद्योगिकी विभाग द्वारा तैयार किए गए New Vigilance Information System जिसे NVIS App कहा जाता है, के माध्यम से इलेक्ट्रॉनिक रूप में तैयार किया गया है। उक्त पंचनामा इलेक्ट्रॉनिक अभिलेख में अंतर्विष्ट सूचना होकर इलेक्ट्रॉनिक दस्तावेज के paper प्रिंट के रूप में साक्ष्य में पूर्णतः ग्राह्य है।
         </p>
         <p>
-          <b>17.) प्रस्तुत पंचनामा विषयक अन्य परिवाद प्रचलित ना होने संबंधी घोषणा :</b> परिवादी द्वारा यह घोषित किया जाता है कि प्रकरण में प्रस्तुत इलेक्ट्रॉनिक रूप से तैयार किए गए उपरोक्त पंचनामे के पेपर प्रिंट से अन्य कोई परिवाद माननीय न्यायालय के समक्ष या किसी अन्य न्यायालय में उक्त अपराध के संबंध में पूर्व से विचाराधीन नहीं है और ना ही प्रस्तुत किया गया है।
+          <b>17.) प्रस्तुत पंचनामा विषयक अन्य परिवाद प्रचलित ना होने संबंधी घोषणा :</b> परिवादी द्वारा यह घोषित किया जाता है कि प्रकरण में प्रस्तुत इलेक्ट्रॉनिक रूप से तैयार किए गए उपरोक्त पंचनामे के paper प्रिंट से अन्य कोई परिवाद माननीय न्यायालय के समक्ष या किसी अन्य न्यायालय में उक्त अपराध के संबंध में पूर्व से विचाराधीन नहीं है और ना ही प्रस्तुत किया गया है।
         </p>
       </div>
-    </div>
 
-    <!-- Page 4 of Complaint -->
-    <div class="page-a4 parivad-page text-black relative" style="padding: 20mm 15mm 20mm 25mm;">
       <div class="text-center font-bold text-sm my-6">।। प्रार्थना ।।</div>
       <div class="text-xs text-justify leading-relaxed space-y-4">
         <p>
@@ -581,12 +529,12 @@
         </p>
       </div>
 
-      <div class="mt-12 flex justify-between text-xs font-semibold">
+      <div class="mt-8 flex justify-between text-xs font-semibold" style="page-break-inside: avoid;">
         <div>
           <p>इति दिनांक: ____/____/2026</p>
           <p>स्थान: उज्जैन</p>
         </div>
-        <div class="text-right leading-relaxed">
+        <div class="text-right leading-relaxed font-sans">
           <p class="font-bold">प्रार्थी</p>
           <p class="font-bold mt-4">(<span class="field-officer_name"></span>)</p>
           <p>कनिष्ठ यंत्री, वितरण केंद्र <span class="field-distribution_center"></span></p>
