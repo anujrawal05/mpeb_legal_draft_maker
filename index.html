@@ -14,7 +14,7 @@
     }
     
     /* Prevent syllable splitting in Hindi */
-    .page-legal, .page-a4, .page-legal *, .page-a4 * {
+    .page-legal, .a4-document-page, .page-legal *, .a4-document-page * {
       letter-spacing: normal !important;
       word-spacing: normal !important;
       word-break: keep-all !important;
@@ -25,13 +25,13 @@
       font-feature-settings: "liga" on, "clig" on, "calt" on !important;
     }
 
-    /* PDF-viewer styling for screen preview */
+    /* Screen layout preview defaults */
     @media screen {
       .no-print-bg {
         background-color: #f3f4f6;
         padding: 40px 0;
       }
-      .page-legal, .page-a4 {
+      .page-legal, .a4-document-page {
         margin: 0 auto 30px auto !important;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         border: 1px solid #e5e7eb;
@@ -41,51 +41,87 @@
       .page-legal {
         width: 215.9mm;
         height: 355.6mm;
+        padding: 20mm;
       }
-      .page-a4 {
+      .a4-document-page {
         width: 210mm;
-        height: 297mm;
+        height: auto;
+        min-height: 297mm;
+        padding: 12mm 15mm;
       }
     }
 
-    /* Strict Legal and A4 Print Styling */
+    /* Exact Print Rules */
     @media print {
+      /* Base Typography */
+      body, p, td, th, span, div, input {
+        font-size: 12pt !important;
+        line-height: 1.4 !important;
+        color: #000000 !important;
+      }
+
+      h1, h2, h3, .doc-heading, .court-title, .title-main {
+        font-size: 15pt !important;
+        font-weight: bold !important;
+        line-height: 1.3 !important;
+      }
+
+      /* Main Parivad Document Page Settings */
+      @page parivad-page {
+        size: A4 portrait;
+        margin-top: 1.5cm;
+        margin-bottom: 1.5cm;
+        margin-right: 1.5cm;
+        margin-left: 3.8cm;
+      }
+
+      .doc-main-parivad {
+        page: parivad-page;
+        page-break-before: always;
+        break-before: page;
+        box-sizing: border-box;
+      }
+
+      /* Other Documents Page Settings (Front Page, Computer Patrak, Vakalatnama, Jaanch Suchi) */
+      @page standard-legal-page {
+        size: A4 portrait;
+        margin-top: 1.0cm;
+        margin-bottom: 1.0cm;
+        margin-right: 1.0cm;
+        margin-left: 2.5cm;
+      }
+
+      .doc-front-page,
+      .doc-computer-patrak,
+      .doc-vakalatnama,
+      .doc-jaanch-suchi {
+        page: standard-legal-page;
+        page-break-before: always;
+        break-before: page;
+        box-sizing: border-box;
+      }
+
+      /* Table Cell Adjustments for 12pt Font */
+      table td, table th {
+        padding: 4px 6px !important;
+        vertical-align: top !important;
+      }
+
       .no-print { display: none !important; }
-      .no-print-bg { background-color: transparent !important; padding: 0 !important; margin: 0 !important; }
       
-      body.print-front-cover-only .page-a4 {
+      #documentOutput, .a4-container {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      body.print-front-cover-only .a4-document-page {
         display: none !important;
       }
       body.print-case-documents-only .page-legal {
         display: none !important;
       }
-
-      .page-legal, .page-a4 {
-        page-break-after: always; 
-        margin: 0 !important;
-        box-shadow: none !important;
-        border: none !important;
-        background: #ffffff;
-        box-sizing: border-box;
-      }
-
-      .page-legal {
-        width: 215.9mm !important;
-        height: 355.6mm !important;
-      }
-
-      .page-a4:not(.parivad-page) {
-        width: 210mm !important;
-        height: 297mm !important;
-      }
-
-      .page-a4.parivad-page {
-        width: 210mm !important;
-        height: auto !important;
-        min-height: 297mm !important;
-      }
-      
-      body { background: #fff; color: #000; }
     }
     
     table, th, td {
@@ -97,46 +133,39 @@
       padding: 4px 6px !important;
       vertical-align: top !important;
     }
-
-    /* Standardized typography scales */
-    .page-a4.parivad-page {
-      font-family: 'Noto Sans Devanagari', sans-serif;
-      font-size: 12pt !important;
-      line-height: 1.4 !important;
-      color: #000000 !important;
-    }
-    .page-a4.parivad-page .title-main {
-      font-size: 14pt !important;
-      font-weight: bold !important;
-    }
-    .page-a4.parivad-page .title-sub {
-      font-size: 12pt !important;
-      font-weight: bold !important;
-    }
-    .page-a4.parivad-page td, .page-a4.parivad-page th {
-      font-size: 10pt !important;
-      padding: 4px 6px !important;
-      vertical-align: top !important;
-    }
-    
-    .page-legal, .page-a4:not(.parivad-page) {
-      font-family: 'Noto Sans Devanagari', sans-serif;
-      font-size: 10pt !important;
-      line-height: 1.3 !important;
-      color: #000000 !important;
-    }
-    .page-legal .title-main, .page-a4:not(.parivad-page) .title-main {
-      font-size: 12pt !important;
-      font-weight: bold !important;
-    }
-    .page-legal .title-sub, .page-a4:not(.parivad-page) .title-sub {
-      font-size: 11pt !important;
-      font-weight: bold !important;
-    }
-    .page-legal td, .page-legal th, .page-a4:not(.parivad-page) td, .page-a4:not(.parivad-page) th {
-      font-size: 10pt !important;
-      padding: 4px 6px !important;
-      vertical-align: top !important;
+  
+    /* Print Target Isolation CSS */
+    @media print {
+      body.print-cover #doc-computer-sheet,
+      body.print-cover #doc-vakalatnama,
+      body.print-cover #doc-jaanch-suchi,
+      body.print-cover #doc-parivad {
+        display: none !important;
+      }
+      body.print-computer-sheet #doc-cover,
+      body.print-computer-sheet #doc-vakalatnama,
+      body.print-computer-sheet #doc-jaanch-suchi,
+      body.print-computer-sheet #doc-parivad {
+        display: none !important;
+      }
+      body.print-vakalatnama #doc-cover,
+      body.print-vakalatnama #doc-computer-sheet,
+      body.print-vakalatnama #doc-jaanch-suchi,
+      body.print-vakalatnama #doc-parivad {
+        display: none !important;
+      }
+      body.print-jaanch-suchi #doc-cover,
+      body.print-jaanch-suchi #doc-computer-sheet,
+      body.print-jaanch-suchi #doc-vakalatnama,
+      body.print-jaanch-suchi #doc-parivad {
+        display: none !important;
+      }
+      body.print-parivad #doc-cover,
+      body.print-parivad #doc-computer-sheet,
+      body.print-parivad #doc-vakalatnama,
+      body.print-parivad #doc-jaanch-suchi {
+        display: none !important;
+      }
     }
   </style>
 </head>
@@ -179,8 +208,8 @@
   <div id="documentOutput" class="hidden max-w-4xl mx-auto my-6 space-y-8 no-print-bg">
     
     <!-- DOCUMENT 1: Front Cover -->
-    <div class="page-legal text-black relative" style="padding: 20mm;">
-      <div class="text-center font-bold title-main leading-snug">
+    <div id="doc-cover" class="page-legal doc-front-page text-black relative" style="padding: 20mm;">
+      <div class="text-center font-bold title-main leading-snug court-title">
         माननीय न्यायालय विशेष न्यायाधीश महोदय (विद्युत अधिनियम)<br>
         एवं अतिरिक्त जिला एवं सत्र न्यायाधीश, बड़नगर, जिला उज्जैन (म.प्र.)
       </div>
@@ -229,7 +258,7 @@
     </div>
 
     <!-- DOCUMENT 2: Computer Patrak (प्रारूप संख्या-2) -->
-    <div class="page-a4 text-black relative" style="padding: 10mm 15mm;">
+    <div id="doc-computer-sheet" class="a4-document-page doc-computer-patrak text-black relative" style="padding: 10mm 15mm;">
       <div class="text-center font-bold text-base">प्रारूप संख्या-2</div>
       <div class="text-center text-xs font-semibold">(अध्याय-1 अ नियम-3)</div>
       <div class="text-center font-bold text-lg underline mt-1">कम्प्यूटर-पत्रक</div>
@@ -306,8 +335,8 @@
     </div>
 
     <!-- DOCUMENT 3: Vakalatnama -->
-    <div class="page-a4 text-black relative" style="padding: 15mm;">
-      <div class="text-center font-bold text-lg underline">वकालतनामा</div>
+    <div id="doc-vakalatnama" class="a4-document-page doc-vakalatnama text-black relative" style="padding: 15mm;">
+      <div class="text-center font-bold text-lg underline doc-heading">वकालतनामा</div>
       <div class="text-center text-xs font-semibold mt-1">(एडवोकेट एक्ट, 1961 के अधीन बनाए गए नियमों का नियम 4(1))</div>
 
       <div class="mt-6 text-sm font-bold">
@@ -387,19 +416,206 @@
     </div>
 
     <!-- DOCUMENT 4: Form 8 -->
-    <div class="page-a4 text-black relative" style="padding: 10mm;">
+    <div id="doc-jaanch-suchi" class="a4-document-page doc-jaanch-suchi text-black relative" style="padding: 10mm;">
       <div class="text-center font-bold text-sm">प्रारूप संख्या-8</div>
       <div class="text-center text-[10px] font-semibold">(अध्याय-4 नियम-52)</div>
       <div class="text-center font-bold text-sm mt-1">................................ (म.प्र.) के न्यायालय में</div>
-      <div class="text-center font-bold text-base underline mt-1">जांच सूची परिवाद</div>
+      <div class="text-center font-bold text-base underline mt-1 doc-heading">जांच सूची परिवाद</div>
 
       <div class="grid grid-cols-2 gap-4 text-xs font-semibold my-4 border p-2 rounded">
         <div>प्रकरण का प्रकार : <span class="font-bold">विशेष विद्युत परिवाद</span></div>
         <div>*क्र. _______________ / 2026 &nbsp;&nbsp;&nbsp;&nbsp; *रा.जे. / एस.जे. / सी.जे.एम. / जे.एम.</div>
-        <div>अभियोगी : <span class="font-bold">म.प्र.प.क्षे.वि.वि.कं.लि.</span> (केवल प्रथम नाम)</div>
-        <div>मुख्य अधिवक्ता : <span class="font-bold">श्रीमती अर्पिता रावल एडवोकेट</span> (पंजीयन क    <!-- DOCUMENT 5: Criminal Complaint (विशेष आपराधिक परिवाद) -->
-    <div class="page-a4 parivad-page text-black relative" style="padding: 20mm 15mm 20mm 25mm; height: auto !important; min-height: 297mm; page-break-after: always;">
-      <div class="text-center font-bold title-main leading-snug">
+        <div>परिवादी : <span class="font-bold">म.प्र.प.क्षे.वि.वि.कं.लि.</span> (केवल प्रथम नाम)</div>
+        <div>मुख्य अधिवक्ता : <span class="font-bold">श्रीमती अर्पिता रावल एडवोकेट</span> (पंजीयन क्र. MP/838/2012)</div>
+        <div>अभियुक्त : <span id="accused-names-jaanch-suchi" class="font-bold"></span> (केवल प्रथम नाम)</div>
+        <div>सहायक अधिवक्ता : <span class="font-bold">N/A</span></div>
+      </div>
+
+      <table class="w-full legal-table text-[10px] mt-4" style="table-layout: fixed;">
+        <thead>
+          <tr class="bg-gray-50">
+            <th class="w-[8%] text-center py-1">क्र.</th>
+            <th class="w-[62%] text-left py-1">विवरण</th>
+            <th class="w-[10%] text-center py-1">हाँ</th>
+            <th class="w-[10%] text-center py-1">नहीं</th>
+            <th class="w-[10%] text-center py-1">लागू नहीं</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center py-1">1</td>
+            <td class="py-1">क्या प्रारूप क्रमांक 2 में कंप्यूटर-पत्रक संलग्न है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">2</td>
+            <td class="py-1">क्या परिवाद अपराध कारित करने में प्रत्येक अभियुक्त की विशिष्ट भूमिका के संक्षिप्त वर्णन के साथ स्पष्ट रूप से लिखा गया है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">3</td>
+            <td class="py-1">क्या प्रत्येक अभियुक्त का नाम, पिता का नाम, आयु, जाति एवं पता शीर्षक में उचित रूप से लिखा गया है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">4</td>
+            <td class="py-1">क्या परिवाद में विधि के प्रावधान जिसके अधीन परिवाद फाइल किया गया है, को स्पष्ट रूप से लिखा गया है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">5</td>
+            <td class="py-1">क्या कोई मौखिक/लिखित प्रथम सूचना रिपोर्ट/इत्तला किसी पुलिस प्राधिकारी को की गई है ? यदि हाँ तो पुलिस अधिकारी का नाम, पुलिस स्टेशन, प्राधिकारी द्वारा इत्तला की तारीख व की गई कार्यवाही का विवरण।</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">6</td>
+            <td class="py-1">क्या मामला पूर्व से लंबित/संस्थित/तयशुदा मामले से संबंधित/आच्छादित है? यदि हाँ तो क्या कार्यवाही की गई उसका विवरण कीजिये।</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">7</td>
+            <td class="py-1">क्या परिवाद में साक्षियों (गवाहों) की विस्तृत सूची संलग्न है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">8</td>
+            <td class="py-1">क्या परिवाद के साथ जब्तशुदा सामग्री/संपत्ति का विवरण व ज़ब्ती पत्रक संलग्न है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">9</td>
+            <td class="py-1">क्या अपराध घटित होने की दिनांक, समय एवं सटीक घटनास्थल का विवरण परिवाद में अंकित है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">10</td>
+            <td class="py-1">क्या परिवादी लोकसेवक है एवं परिवाद प्रस्तुत करने हेतु सक्षम प्राधिकार पत्र / गजट अधिसूचना संलग्न है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">11</td>
+            <td class="py-1">क्या नियमानुसार वकालतनामा संलग्न है एवं उस पर आवश्यक एडवोकेट वेलफेयर टिकट संलग्न है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">12</td>
+            <td class="py-1">क्या परिवाद पत्र पर उचित न्यायशुल्क (कोर्ट फीस) संदत्त किया गया है अथवा लोकसेवक होने से छूट प्राप्त है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">13</td>
+            <td class="py-1">क्या धारा 152 विद्युत अधिनियम के तहत शमन (Compounding) सूचना पत्र एवं डाक तामीली की रसीद संलग्न है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">14</td>
+            <td class="py-1">क्या विद्युत चोरी से कारित क्षति राशि (₹<span class="field-assessment_amount"></span>/-) एवं निर्धारण बिल की प्रति संलग्न है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">15</td>
+            <td class="py-1">क्या परिवाद क्षेत्राधिकार वाले सक्षम न्यायालय के समक्ष प्रस्तुत किया गया है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">16</td>
+            <td class="py-1">क्या परिवाद पत्र कानून द्वारा निर्धारित परिसीमा अवधि (Limitation Period) के भीतर प्रस्तुत है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">17</td>
+            <td class="py-1">क्या परिवादी द्वारा परिवाद पत्र के अंत में नियमानुसार सत्यनिष्ठा से सत्यापन (Verification) अंकित किया गया है ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">18</td>
+            <td class="py-1">क्या अभियुक्त को जारी होने वाले समन/प्रोसेस हेतु परिवाद एवं दस्तावेजों की आवश्यक प्रतियां प्रस्तुत हैं ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">19</td>
+            <td class="py-1">क्या मौका नक़्शा व स्थल की स्थिति प्रमाणित करने संबंधी दस्तावेज़ संलग्न हैं ?</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+            <td class="text-center py-1">[ &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">20</td>
+            <td colspan="4">प्रकरण प्रस्तुत करने की दिनांक : &nbsp;&nbsp;&nbsp;&nbsp; / &nbsp;&nbsp;&nbsp;&nbsp; / 2026</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">21</td>
+            <td colspan="4">अभियुक्त की सामाजिक श्रेणी : [ &nbsp; ] सामान्य &nbsp;/&nbsp; [ &nbsp; ] अन्य पिछड़ा वर्ग (OBC) &nbsp;/&nbsp; [ &nbsp; ] अनु.जाति &nbsp;/&nbsp; [ &nbsp; ] अनु.जनजाति</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">22</td>
+            <td colspan="4">अभियुक्त की अनुमानित वार्षिक आय : [ &nbsp; ] 01 लाख से कम &nbsp;/&nbsp; [ &nbsp; ] 01 लाख से 03 लाख &nbsp;/&nbsp; [ &nbsp; ] 03 लाख से अधिक</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">23</td>
+            <td colspan="4">अभियुक्त का लिंग एवं अनुमानित आयु : [ &nbsp; ] पुरुष &nbsp;/&nbsp; [ &nbsp; ] महिला &nbsp;/&nbsp; [ &nbsp; ] अन्य &nbsp;|&nbsp; उम्र करीब ............ वर्ष</td>
+          </tr>
+          <tr>
+            <td class="text-center py-1">24</td>
+            <td colspan="4">अभियुक्त का व्यवसाय/आजीविका : [ &nbsp; ] कृषि &nbsp;/&nbsp; [ &nbsp; ] मजदूरी &nbsp;/&nbsp; [ &nbsp; ] व्यापार &nbsp;/&nbsp; [ &nbsp; ] अन्य</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="mt-4 flex justify-between text-xs font-semibold">
+        <div>
+          <p>स्थान : बड़नगर / उज्जैन</p>
+          <p>दिनांक : __________________</p>
+        </div>
+        <div class="text-right leading-relaxed font-sans">
+          <p class="font-bold">प्रकरण प्रस्तुत करने वाले अधिवक्ता</p>
+          <p class="font-bold mt-2"><span class="inline-block whitespace-nowrap">का नाम :</span> श्रीमती अर्पिता रावल</p>
+          <p class="text-xs">पंजीयन क्रमांक: MP/838/2012</p>
+          <p class="text-xs">मोबाईल नंबर: 8878977124</p>
+          <p class="text-xs">ई-मेल आईडी. : arpitarawal1983@gmail.com</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCUMENT 5: Criminal Complaint (विशेष आपराधिक परिवाद) -->
+    <div id="doc-parivad" class="a4-document-page parivad-page doc-main-parivad text-black relative" style="padding: 20mm 15mm 20mm 25mm;">
+      <div class="text-center font-bold title-main leading-snug court-title">
         माननीय न्यायालय विशेष न्यायाधीश महोदय,<br>
         (अन्तर्गत विद्युत अधिनियम 2003) उज्जैन (म.प्र.)
       </div>
@@ -533,6 +749,9 @@
 
   </div>
 
+  <!-- Client-side Document Tools -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html-docx-js/0.3.1/html-docx.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
   <script src="config.js"></script>
   <script src="app.js"></script>
 </body>

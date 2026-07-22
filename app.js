@@ -460,6 +460,21 @@ function renderAccusedBlocks() {
     }
   }
 
+  // 3b. Jaanch Suchi
+  const jaanchNamesContainer = document.getElementById('accused-names-jaanch-suchi');
+  if (jaanchNamesContainer) {
+    if (accusedList.length > 0) {
+      const firstName = accusedList[0].name.trim().split(' ')[0];
+      if (accusedList.length === 1) {
+        jaanchNamesContainer.innerText = firstName;
+      } else {
+        jaanchNamesContainer.innerText = `${firstName} एवं अन्य`;
+      }
+    } else {
+      jaanchNamesContainer.innerText = '';
+    }
+  }
+
   // 4. Parivad Table
   const parContainer = document.getElementById('accused-list-parivad');
   if (parContainer) {
@@ -521,4 +536,92 @@ function printCaseDocuments() {
   document.body.classList.remove('print-front-cover-only');
   document.getElementById('documentOutput').classList.remove('hidden');
   window.print();
+}
+
+
+// Client-side PDF Print Target Isolation
+function printSingleDoc(docId) {
+  // Set class on body to isolate the document
+  document.body.className = `print-${docId}`;
+  
+  // Show document output container
+  document.getElementById('documentOutput').classList.remove('hidden');
+  
+  // Trigger print
+  window.print();
+  
+  // Clean up body class
+  document.body.className = '';
+}
+
+// Client-side HTML to DOCX Download Engine
+function downloadDocx(docId) {
+  try {
+    const element = document.getElementById(`doc-${docId}`);
+    if (!element) {
+      throw new Error(`Element doc-${docId} not found`);
+    }
+
+    // Get element HTML content
+    let htmlContent = element.innerHTML;
+
+    // Define target page margins
+    const marginStyle = docId === 'parivad'
+      ? "@page { size: A4; margin: 1.5cm 1.5cm 1.5cm 3.8cm; }"
+      : "@page { size: A4; margin: 1.0cm 1.0cm 1.0cm 2.5cm; }";
+
+    // Setup full HTML document structure with styles for word document
+    const fullHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    \${marginStyle}
+    body {
+      font-family: Mangal, 'Noto Sans Devanagari', Arial, sans-serif;
+      font-size: 12pt;
+      line-height: 1.4;
+      color: #000000;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #000000;
+      padding: 4px 6px;
+      vertical-align: top;
+      font-size: 10pt;
+    }
+    .font-bold { font-weight: bold; }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    .underline { text-decoration: underline; }
+    .mt-4 { margin-top: 15px; }
+    .mt-8 { margin-top: 30px; }
+    .mb-4 { margin-bottom: 15px; }
+    .space-y-4 > * { margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  \${htmlContent}
+</body>
+</html>`;
+
+    // Convert HTML to .docx blob using html-docx-js
+    const blob = htmlDocx.asBlob(fullHtml);
+
+    // Save using FileSaver
+    let accusedSimpleName = 'case';
+    const accusedList = extractedData.accused_list || [];
+    if (accusedList.length > 0) {
+      accusedSimpleName = accusedList[0].name.trim().replace(/\s+/g, '_');
+    }
+    const filename = `\${docId}_\${accusedSimpleName}.docx`;
+    saveAs(blob, filename);
+
+  } catch (error) {
+    alert("Error downloading DOCX: " + error.message);
+    console.error(error);
+  }
 }
