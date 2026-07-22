@@ -9,15 +9,32 @@
   <style>
     body { font-family: 'Noto Sans Devanagari', sans-serif; }
     
+    /* PDF-viewer styling for screen preview */
+    @media screen {
+      .no-print-bg {
+        background-color: #f3f4f6;
+        padding: 40px 0;
+      }
+      .print-page {
+        margin: 0 auto 30px auto !important;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e5e7eb;
+        background: #ffffff;
+      }
+    }
+
     /* Strict Legal A4 Print Styling */
     @media print {
       .no-print { display: none !important; }
+      .no-print-bg { background-color: transparent !important; padding: 0 !important; margin: 0 !important; }
       .print-page { 
         page-break-after: always; 
-        margin: 0;
-        padding: 15mm;
-        width: 210mm;
-        min-height: 297mm;
+        margin: 0 !important;
+        padding: 15mm !important;
+        width: 210mm !important;
+        min-height: 297mm !important;
+        box-shadow: none !important;
+        border: none !important;
       }
       body { background: #fff; color: #000; }
     }
@@ -62,77 +79,452 @@
   </div>
 
   <!-- Document Template Render Area -->
-  <div id="documentOutput" class="hidden">
+  <div id="documentOutput" class="hidden max-w-4xl mx-auto my-6 space-y-8 no-print-bg">
     
-    <!-- DOCUMENT 1: Special Criminal Complaint u/s 135 -->
-    <div class="print-page bg-white">
+    <!-- DOCUMENT 1: Front Cover -->
+    <div class="print-page bg-white shadow-lg mx-auto p-12 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+      <div class="text-center font-bold text-lg leading-snug">
+        माननीय न्यायालय विशेष न्यायाधीश महोदय (विद्युत अधिनियम)<br>
+        एवं अतिरिक्त जिला एवं सत्र न्यायाधीश, बड़नगर, जिला उज्जैन (म.प्र.)
+      </div>
+      <div class="text-center text-sm font-semibold mt-1">
+        (विशेष न्यायालय, विद्युत अधिनियम, 2003 के अन्तर्गत)
+      </div>
+      
+      <div class="border-t border-black my-4"></div>
+
+      <div class="flex justify-between my-2 text-sm font-semibold">
+        <span>प्रकरण क्रमांक: ___________________ / विशेष विद्युत फ़ौजदारी / 2026</span>
+        <span>प्रस्तुति दिनांक: ____/____/2026</span>
+      </div>
+
+      <div class="mt-8">
+        <p class="font-bold text-sm underline">अभियोगी (परिवादी):</p>
+        <div class="pl-6 mt-2 text-sm leading-relaxed">
+          <p class="font-bold">मध्यप्रदेश पश्चिम क्षेत्र विद्युत वितरण कंपनी लिमिटेड</p>
+          <p>द्वारा: श्री <span class="field-officer_name font-bold"></span>, कनिष्ठ यंत्री,</p>
+          <p>वितरण केंद्र <span class="field-distribution_center font-bold"></span>, संभाग बड़नगर,</p>
+          <p>म.प्र.प.क्षे.वि.वि.कं.लि., जिला उज्जैन (म.प्र.)</p>
+        </div>
+      </div>
+
+      <div class="text-center font-bold my-6 text-sm">- विरुद्ध -</div>
+
+      <div>
+        <p class="font-bold text-sm underline">अभियुक्त (आरोपीगण):</p>
+        <div class="pl-6 mt-2 text-sm space-y-3 leading-relaxed">
+          <p>
+            <span class="font-bold">1. <span class="field-consumer_name"></span> <span class="field-consumer_father_name"></span></span> (भवन स्वामी / उपभोक्ता)<br>
+            पता: ग्राम <span class="field-village font-semibold"></span>, <span class="field-police_station"></span>, तहसील बड़नगर, जिला उज्जैन (म.प्र.)
+          </p>
+          <p>
+            <span class="font-bold">2. <span class="field-user_name"></span> <span class="field-user_father_name"></span></span>, उम्र <span class="field-user_age font-semibold"></span> वर्ष (उपयोगकर्ता)<br>
+            पता: ग्राम <span class="field-village font-semibold"></span>, <span class="field-police_station"></span>, तहसील बड़नगर, जिला उज्जैन (म.प्र.)<br>
+            मोबाईल नंबर: <span class="field-mobile font-semibold"></span>
+          </p>
+        </div>
+      </div>
+
+      <div class="my-10 border-2 border-black p-4 text-center bg-gray-50 rounded">
+        <span class="font-bold text-base">विशेष परिवाद पत्र अन्तर्गत धारा 135, विद्युत अधिनियम, 2003</span>
+      </div>
+
+      <div class="mt-12 text-sm">
+        <p class="font-bold underline">परिवादी की ओर से अधिवक्ता:</p>
+        <div class="mt-2 font-bold leading-relaxed">
+          <p class="text-base text-blue-900">श्रीमती अर्पिता रावल</p>
+          <p class="text-gray-800 font-semibold">विशेष लोक अभियोजक / पैनल अधिवक्ता</p>
+          <p class="text-xs text-gray-700 font-normal">नामांकन क्रमांक: MP/838/2012</p>
+          <p class="text-xs text-gray-700 font-normal">कार्यालय / निवास: बड़नगर / उज्जैन (म.प्र.)</p>
+          <p class="text-xs text-gray-700 font-normal">मोबाईल नंबर: 8878977124 | ई-मेल: arpitarawal1983@gmail.com</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCUMENT 2: Computer Patrak (प्रारूप संख्या-2) -->
+    <div class="print-page bg-white shadow-lg mx-auto p-12 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+      <div class="text-center font-bold text-base">प्रारूप संख्या-2</div>
+      <div class="text-center text-xs font-semibold">(अध्याय-1 अ नियम-3)</div>
+      <div class="text-center font-bold text-lg underline mt-1">कम्प्यूटर-पत्रक</div>
+      <div class="text-center text-xs mt-1 font-semibold">(केवल काली स्याही से भरा जाए)</div>
+
+      <div class="flex justify-between my-4 text-xs font-bold">
+        <span>प्रकरण का वर्ग: _______________</span>
+        <span>*क्र. _______________ / 2026</span>
+        <span>*रा.जे. / एस.जे. / सी.जे.एम. / ए.सी.जे.एम. / जे.एम.</span>
+      </div>
+
+      <table class="w-full legal-table text-xs mt-4">
+        <tr>
+          <td class="w-1/3 font-bold py-3">1. अभियोजन / अभियुक्त याचिकाकर्ता अपीलार्थी आवेदक</td>
+          <td class="py-3 leading-relaxed">
+            <span class="font-bold">म.प्र.पश्चिम क्षेत्र वि.वि.कं.लि.</span> द्वारा श्री <span class="field-officer_name font-bold"></span>,<br>
+            कनिष्ठ यंत्री वि.के. <span class="field-distribution_center font-semibold"></span>, संभाग बड़नगर,<br>
+            जिला उज्जैन (म.प्र.)
+          </td>
+        </tr>
+        <tr>
+          <td class="font-bold py-3">2. अभियुक्त / अभियोजन प्रतिवादी अनावेदक</td>
+          <td class="py-3 leading-relaxed space-y-2">
+            <p>
+              1. <span class="field-consumer_name font-bold"></span> <span class="field-consumer_father_name font-bold"></span> (भवन स्वामी / उपभोक्ता)<br>
+              पता-ग्राम <span class="field-village"></span>, <span class="field-police_station"></span>, तह. बड़नगर, जिला उज्जैन
+            </p>
+            <p>
+              2. <span class="field-user_name font-bold"></span> <span class="field-user_father_name font-bold"></span>, उम्र <span class="field-user_age"></span> वर्ष (उपयोगकर्ता)<br>
+              पता-ग्राम <span class="field-village"></span>, <span class="field-police_station"></span>, तह. बड़नगर, जिला उज्जैन<br>
+              मोबाईल नंबर-<span class="field-mobile"></span>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-bold py-2">3. प्रस्तुति व पंजीकरण दिनांक</td>
+          <td class="py-2">____________________________________________________________</td>
+        </tr>
+        <tr>
+          <td class="font-bold py-2">4. विषय वस्तु</td>
+          <td class="py-2 font-bold">विद्युत ऊर्जा की चोरी / अप्राधिकृत उपयोग</td>
+        </tr>
+        <tr>
+          <td class="font-bold py-2">5. विधिक उपबंध :</td>
+          <td class="py-2 font-bold">धारा 135 विद्युत अधिनियम, 2003</td>
+        </tr>
+        <tr>
+          <td class="font-bold py-3">6. *विषय प्रवर्ग कोड क्रं. - उप कोड क्र. - <br><span class="font-normal text-[10px]">(नियमों के अध्याय 1-ब के अनुसार)</span></td>
+          <td class="py-3">____________________________________________________________</td>
+        </tr>
+        <tr>
+          <td class="font-bold py-2">7. मुख्य अधिवक्ता का नाम, यदि कोई हो :<br><span class="font-normal text-[10px]">(राज्य अधिवक्ता परिषद के नामांकन क्रमांक के साथ)</span></td>
+          <td class="py-2 font-bold">श्रीमती अर्पिता रावल एड. MP/838/2012</td>
+        </tr>
+        <tr>
+          <td class="font-bold py-2">8. सहायक अधिवक्ता / अधिवक्ताओं के नाम :</td>
+          <td class="py-2">____________________________________________________________</td>
+        </tr>
+        <tr>
+          <td class="font-bold py-3">9. निचले न्यायालय / प्राधिकारी (यदि प्रयोज्य हो) का विवरण :-</td>
+          <td class="py-3 leading-relaxed">
+            (a) नाम :- NA <br>
+            (b) पदनाम :- _______________ स्थान :- _______________<br>
+            (c) प्रकरण, फाइल / आदेश क्र. ______________________________<br>
+            (d) आलोच्य निर्णय / आदेश की दिनांक, जहां भी प्रयोज्य हो ______________________________<br>
+            स्थान : <span class="font-semibold">बड़नगर / उज्जैन</span><br>
+            दिनांक : __________________
+          </td>
+        </tr>
+      </table>
+
+      <div class="mt-8 flex justify-end text-xs">
+        <div class="text-right leading-relaxed">
+          <p class="font-bold">प्रकरण प्रस्तुत करने वाले अधिवक्ता</p>
+          <p class="font-bold mt-4">का नाम : श्रीमती अर्पिता रावल एड. MP/838/2012</p>
+          <p>हस्ताक्षर : _________________________________</p>
+          <p>मोबाइल नं. : 8878977124</p>
+          <p>ई-मेल आईडी. : arpitarawal1983@gmail.com</p>
+        </div>
+      </div>
+      <div class="absolute bottom-6 left-12 text-[10px] text-gray-500">
+        *क्रमांक व न्यायालय का नाम कार्यालय द्वारा भरा जावेगा।
+      </div>
+    </div>
+
+    <!-- DOCUMENT 3: Vakalatnama -->
+    <div class="print-page bg-white shadow-lg mx-auto p-12 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+      <div class="text-center font-bold text-lg underline">वकालतनामा</div>
+      <div class="text-center text-xs font-semibold mt-1">(एडवोकेट एक्ट, 1961 के अधीन बनाए गए नियमों का नियम 4(1))</div>
+
+      <div class="mt-6 text-sm font-bold">
+        माननीय न्यायालय ___________________________________________________________
+      </div>
+
+      <div class="flex justify-between items-center my-6 text-xs border border-gray-400 p-3 rounded">
+        <div class="w-[45%] font-bold text-center">
+          मध्यप्रदेश पश्चिम क्षेत्र विद्युत वितरण कंपनी लिमिटेड, द्वारा कनिष्ठ यंत्री
+          <div class="text-[10px] text-gray-600 mt-2 font-normal">{ वादी / आवेदक / याचिकाकर्ता / परिवादी }</div>
+        </div>
+        <div class="font-bold text-sm">- विरुद्ध -</div>
+        <div class="w-[45%] font-bold text-center">
+          1. <span class="field-consumer_name"></span> एवं अन्य
+          <div class="text-[10px] text-gray-600 mt-2 font-normal">{ प्रतिवादी / अनावेदक / प्रति-आवेदक / अभियुक्त }</div>
+        </div>
+      </div>
+
+      <div class="text-xs text-justify leading-relaxed space-y-3">
+        <p>
+          मैं / हम नीचे नामांकित वादी / अपीलार्थी / दावेदार / याचिकाकर्ता / प्रतिवादी / अनावेदक / अभियुक्त, एतद्द्वारा नीचे नामांकित अधिवक्ता को उक्त प्रकरण / कार्यवाही में उपस्थित होने, पैरवी करने तथा बहस करने हेतु नियुक्त एवं अधिकृत करता हूँ / करते हैं। इसमें पुनर्स्थापना आवेदन, एकपक्षीय आदेश निरस्त करने, संशोधन, पुनरीक्षण, पुनर्वलोकन तथा इस न्यायालय या अन्य किसी न्यायालय अथवा अपील, पुनरीक्षण या निष्पादन न्यायालय में प्रस्तुत होने वाले सभी आवेदनों / कार्यवाहियों में पैरवी करने का अधिकार शामिल होगा। हम उन्हें हमारी ओर से परिवाद, जवाब, अपील, क्रॉस आपत्ति, याचिका, आवेदन, शपथ पत्र या अन्य आवश्यक दस्तावेज़ों पर हस्ताक्षर करने तथा प्रस्तुत करने हेतु अधिकृत करते हैं और उनके द्वारा किए गए समस्त कार्यों को स्वयं द्वारा किया गया मानकर स्वीकार करते हैं।
+        </p>
+        <p>
+          जिसके साक्ष्य स्वरूप मैं / हमने अपने हस्ताक्षर / अँगूठा निशान आज दिनांक __________ माह ____________________ वर्ष 20_______ को निष्पादित किए हैं, जिसकी सामग्री को हमने भली-भाँति समझ लिया है।
+        </p>
+      </div>
+
+      <div class="mt-8">
+        <div class="font-bold text-xs mb-2">वकालतनामा निष्पादित करने वाले प्रत्येक पक्षकार का विवरण (बड़े अक्षरों में)</div>
+        <table class="w-full legal-table text-[10px]">
+          <thead>
+            <tr class="bg-gray-50">
+              <th class="w-1/4">नाम एवं पिता / पति का नाम</th>
+              <th class="w-1/3">पंजीकृत पता</th>
+              <th>ई-मेल (यदि हो)</th>
+              <th>दूरभाष / मो.</th>
+              <th>प्रकरण में स्थिति</th>
+              <th>पूर्ण हस्ताक्षर / अँगूठा निशान</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="py-4 font-semibold"><span class="field-officer_name"></span></td>
+              <td class="py-4">वितरण केंद्र <span class="field-distribution_center"></span>, संभाग बड़नगर</td>
+              <td class="py-4">arpitarawal1983@gmail.com</td>
+              <td class="py-4">8878977124</td>
+              <td class="py-4 font-semibold text-center">परिवादी</td>
+              <td class="py-4"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-8">
+        <div class="font-bold text-xs mb-2">वकालतनामा स्वीकार करने वाले अधिवक्ता का विवरण</div>
+        <table class="w-full legal-table text-[10px]">
+          <thead>
+            <tr class="bg-gray-50">
+              <th class="w-1/3">पूरा नाम एवं राज्य बार काउंसिल पंजीयन क्र.</th>
+              <th>तामीली का पता</th>
+              <th>ई-मेल</th>
+              <th>दूरभाष / मो.</th>
+              <th>पूर्ण हस्ताक्षर</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="py-5 font-bold">श्रीमती अर्पिता रावल<br>पंजीयन क्र. MP/838/2012</td>
+              <td class="py-5">बड़नगर / उज्जैन (म.प्र.)</td>
+              <td class="py-5">arpitarawal1983@gmail.com</td>
+              <td class="py-5">8878977124</td>
+              <td class="py-5"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOCUMENT 4: Form 8 -->
+    <div class="print-page bg-white shadow-lg mx-auto p-10 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+      <div class="text-center font-bold text-sm">प्रारूप संख्या-8</div>
+      <div class="text-center text-[10px] font-semibold">(अध्याय-4 नियम-52)</div>
+      <div class="text-center font-bold text-sm mt-1">................................ (म.प्र.) के न्यायालय में</div>
+      <div class="text-center font-bold text-base underline mt-1">जांच सूची परिवाद</div>
+
+      <div class="grid grid-cols-2 gap-4 text-xs font-semibold my-4 border p-2 rounded">
+        <div>प्रकरण का प्रकार : <span class="font-bold">विशेष विद्युत परिवाद</span></div>
+        <div>*क्र. _______________ / 2026 &nbsp;&nbsp;&nbsp;&nbsp; *रा.जे. / एस.जे. / सी.जे.एम. / जे.एम.</div>
+        <div>अभियोगी : <span class="font-bold">म.प्र.प.क्षे.वि.वि.कं.लि.</span> (केवल प्रथम नाम)</div>
+        <div>मुख्य अधिवक्ता : <span class="font-bold">श्रीमती अर्पिता रावल एडवोकेट</span> (पंजीयन क्र. MP/838/2012)</div>
+        <div>अभियुक्त : <span class="field-consumer_name font-bold"></span> एवं अन्य (केवल प्रथम नाम)</div>
+        <div>सहायक अधिवक्ता : <span class="font-bold">N/A</span></div>
+      </div>
+
+      <table class="w-full legal-table text-[9px]">
+        <thead>
+          <tr class="bg-gray-100 font-bold text-center">
+            <th class="p-1 w-[5%]">क्र.</th>
+            <th class="p-1 w-[70%]">विवरण</th>
+            <th class="p-1 w-[8%]">हाँ</th>
+            <th class="p-1 w-[8%]">नहीं</th>
+            <th class="p-1 w-[9%]">लागू नहीं (N.A.)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="text-center">1</td><td>क्या प्रारूप क्रमांक 2 में कंप्यूटर-पत्रक संलग्न है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">2</td><td>क्या परिवाद अपराध कारित करने में प्रत्येक अभियुक्त की विशिष्ट भूमिका के संक्षिप्त वर्णन के साथ स्पष्ट रूप से लिखा गया है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">3</td><td>क्या प्रत्येक अभियुक्त का नाम, पिता का नाम, आयु, जाति एवं पता शीर्षक में उचित रूप से लिखा गया है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">4</td><td>क्या परिवाद में विधि के प्रावधान जिसके अधीन परिवाद फाइल किया गया है, को स्पष्ट रूप से लिखा गया है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">5</td><td>क्या कोई मौखिक / लिखित प्रथम सूचना रिपोर्ट / इत्तिला किसी पुलिस प्राधिकारी को की गई है? यदि हाँ तो पुलिस अधिकारी का नाम, पुलिस स्टेशन, प्राधिकारी द्वारा इत्तिला की तारीख व की गई कार्यवाही का विवरण।</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">6</td><td>क्या मामला पूर्व से लंबित / संस्थित / तयशुदा मामले से संबंधित / आच्छादित है? यदि हाँ तो क्या कार्यवाही की गई उसका विवरण कीजिये।</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">7</td><td>क्या परिवाद में साक्षियों (गवाहों) की विस्तृत सूची संलग्न है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">8</td><td>क्या परिवाद के साथ जब्तशुदा सामग्री / संपत्ति का विवरण व ज़ब्ती पत्रक संलग्न है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">9</td><td>क्या अपराध घटित होने की दिनांक, समय एवं सटीक घटना स्थल का विवरण परिवाद में अंकित है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">10</td><td>क्या परिवादी लोक सेवक है एवं परिवाद प्रस्तुत करने हेतु सक्षम प्राधिकार पत्र / गजट अधिसूचना संलग्न है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">11</td><td>क्या नियमानुसार वकालतनामा संलग्न है एवं उस पर आवश्यक एडवोकेट वेलफेयर टिकट संलग्न है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">12</td><td>क्या परिवाद पत्र पर उचित न्याय शुल्क (कोर्ट फीस) संदत्त किया गया है अथवा लोक सेवक होने से छूट प्राप्त है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">13</td><td>क्या धारा 152 विद्युत अधिनियम के तहत शमन (Compounding) सूचना पत्र एवं डाक तामीली की रसीद संलग्न है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">14</td><td>क्या विद्युत चोरी से कारित क्षति राशि (₹<span class="field-assessment_amount font-bold"></span>/-) एवं निर्धारण बिल की प्रति संलग्न है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">15</td><td>क्या परिवाद क्षेत्राधिकार वाले सक्षम न्यायालय के समक्ष प्रस्तुत किया गया है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">16</td><td>क्या परिवाद पत्र कानून द्वारा निर्धारित परिसीमा अवधि (Limitation Period) के भीतर प्रस्तुत है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">17</td><td>क्या परिवादी द्वारा परिवाद पत्र के अंत में नियमानुसार सत्यनिष्ठा से सत्यापन (Verification) अंकित किया गया है ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">18</td><td>क्या अभियुक्त को जारी होने वाले समन/प्रोसेस हेतु परिवाद एवं दस्तावेजों की आवश्यक प्रतियां प्रस्तुत हैं ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">19</td><td>क्या मौका नक़्शा व स्थल की स्थिति प्रमाणित करने संबंधी दस्तावेज़ संलग्न हैं ?</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">20</td><td>प्रकरण प्रस्तुत करने की दिनांक : ______ / ______ / 2026</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">21</td><td>अभियुक्त की सामाजिक श्रेणी: [ ] सामान्य / [ ] अन्य पिछड़ा वर्ग (OBC) / [ ] अनु. जाति / [ ] अनु. जनजाति</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">22</td><td>अभियुक्त की अनुमानित वार्षिक आय: [ ] 01 लाख से कम / [ ] 01 लाख से 03 लाख / [ ] 03 लाख से अधिक</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">23</td><td>अभियुक्त का लिंग एवं अनुमानित आयु: [ ] पुरुष / [ ] महिला / [ ] अन्य | उम्र करीब ..... वर्ष</td><td></td><td></td><td></td></tr>
+          <tr><td class="text-center">24</td><td>अभियुक्त का व्यवसाय / आजीविका : [ ] कृषि / [ ] मजदूरी / [ ] व्यापार / [ ] अन्य</td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <div class="mt-4 flex justify-between text-[10px]">
+        <div>
+          <p>स्थान : बड़नगर / उज्जैन</p>
+          <p>दिनांक : __________________</p>
+        </div>
+        <div class="text-right">
+          <p class="font-bold">प्रकरण प्रस्तुत करने वाले अधिवक्ता</p>
+          <p class="font-bold">का नाम : श्रीमती अर्पिता रावल एड. MP/838/2012</p>
+          <p>हस्ताक्षर : _________________________________</p>
+          <p>मोबाईल नं. : 8878977124</p>
+          <p>ई-मेल आईडी. : arpitarawal1983@gmail.com</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCUMENT 5: Criminal Complaint (विशेष आपराधिक परिवाद) -->
+    <!-- Page 1 of Complaint -->
+    <div class="print-page bg-white shadow-lg mx-auto p-12 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
       <div class="text-center font-bold text-base leading-snug">
         माननीय न्यायालय विशेष न्यायाधीश महोदय,<br>
         (अन्तर्गत विद्युत अधिनियम 2003) उज्जैन (म.प्र.)
       </div>
       
-      <div class="flex justify-between my-2 text-sm">
-        <span>प्रकरण क्रमांकः ______ /2026</span>
-        <span>विशेष आपराधिक परिवाद</span>
+      <div class="flex justify-between my-2 text-xs font-semibold">
+        <span>प्रकरण क्रमांकः ____________ /2026</span>
+        <span class="underline">विशेष आपराधिक परिवाद</span>
       </div>
 
-      <table class="w-full legal-table text-xs mb-4">
+      <table class="w-full legal-table text-[10px] mb-4">
         <tr>
           <td class="w-1/3 font-bold">1. परिवादी का नाम व पताः</td>
           <td>
             मध्यप्रदेश पश्चिम क्षेत्र विद्युत वितरण कंपनी लिमिटेड, द्वाराः - <span class="field-officer_name font-bold"></span>, 
+            पिता श्री <span class="field-officer_father_name font-semibold"></span>, उम्र लगभग <span class="field-officer_age"></span> वर्ष, 
             कनिष्ठ यंत्री, वितरण केंद्र <span class="field-distribution_center font-bold"></span>, 
             संभाग बड़नगर, म.प्र.प.क्षे.वि.वि.कं.लि., जिला उज्जैन (म.प्र.)
+            <div class="text-right font-bold mt-1">--------परिवादी</div>
           </td>
         </tr>
         <tr>
           <td class="font-bold">2. आरोपी / उपयोगकर्ता का नाम व पताः</td>
           <td>
-            1. <span class="field-consumer_name font-bold"></span> (भवन स्वामी / उपभोक्ता)<br>
-            2. <span class="field-user_name font-bold"></span>, उम्र <span class="field-user_age"></span> वर्ष (उपयोगकर्ता)<br>
-            पता - ग्राम <span class="field-village"></span>, थाना इंगोरिया, तहसील बड़नगर, जिला उज्जैन (म.प्र.)<br>
-            मोबाईल नंबर- <span class="field-mobile"></span>
+            1. <span class="field-consumer_name font-bold"></span> <span class="field-consumer_father_name font-bold"></span> (भवन स्वामी / उपभोक्ता)<br>
+            पता - ग्राम <span class="field-village"></span>, <span class="field-police_station"></span>, तहसील बड़नगर, जिला उज्जैन (म.प्र.)<br><br>
+            2. <span class="field-user_name font-bold"></span> <span class="field-user_father_name font-bold"></span>, उम्र <span class="field-user_age font-semibold"></span> वर्ष (उपयोगकर्ता)<br>
+            पता - ग्राम <span class="field-village"></span>, <span class="field-police_station"></span>, तहसील बड़नगर, जिला उज्जैन (म.प्र.)<br>
+            मोबाईल नंबर- <span class="field-mobile font-semibold"></span>
+            <div class="text-right font-bold mt-1">--------आरोपीगण</div>
           </td>
         </tr>
         <tr>
-          <td class="font-bold">3. अपराध की धारा व प्रकार:</td>
-          <td>धारा 135, विद्युत अधिनियम 2003 (विद्युत ऊर्जा की सीधी चोरी)</td>
+          <td class="font-bold">3. अपराध की धारा:</td>
+          <td class="font-bold">धारा 135, विद्युत अधिनियम 2003</td>
         </tr>
         <tr>
-          <td class="font-bold">4. अपराध दिनांक, समय व स्थल:</td>
+          <td class="font-bold">4. अपराध का प्रकार:</td>
+          <td>विद्युत ऊर्जा की सीधी चोरी (Direct Theft)</td>
+        </tr>
+        <tr>
+          <td class="font-bold">5. अपराध दिनांक व समय:</td>
+          <td>दिनांक <span class="field-inspection_date font-bold"></span>, समय <span class="field-inspection_time font-semibold"></span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">6. अपराध का स्थान:</td>
+          <td>ग्राम <span class="field-village font-semibold"></span>, तहसील बड़नगर, जिला उज्जैन (म.प्र.)</td>
+        </tr>
+        <tr>
+          <td class="font-bold">7. अपराध का थाना क्षेत्र:</td>
+          <td><span class="field-police_station font-semibold"></span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">8. गवाहों का विवरण:</td>
           <td>
-            दिनांक <span class="field-inspection_date font-bold"></span>, समय <span class="field-inspection_time"></span><br>
-            ग्राम <span class="field-village"></span>, तहसील बड़नगर, जिला उज्जैन
+            <span class="field-witness_list whitespace-pre-line leading-relaxed"></span><br>
+            4. अन्य गवाह परिवादी आवश्यकतानुसार प्रस्तुत कर सकेगा।
           </td>
         </tr>
         <tr>
-          <td class="font-bold">5. आर्थिक क्षति व शमन शुल्क:</td>
-          <td>
-            क्षति राशि: ₹<span class="field-assessment_amount font-bold"></span>/- | 
-            शमन शुल्क: ₹<span class="field-compounding_amount"></span>/- | 
-            सकल राशि: ₹<span class="field-total_amount font-bold"></span>/-
-          </td>
+          <td class="font-bold">9. जप्त वस्तुएं:</td>
+          <td>निरंक (NA)</td>
         </tr>
       </table>
+    </div>
 
-      <div class="text-xs space-y-2 text-justify">
-        <p><b>1.)</b> यह कि, दिनांक <span class="field-inspection_date"></span> को दल द्वारा निरीक्षण के दौरान पाया गया कि आरोपी द्वारा बिना किसी वैध कनेक्शन के सीधी एल.टी. लाइन से तार जोड़कर कुल <b><span class="field-sanctioned_load"></span></b> भार का अनाधिकृत उपयोग किया जा रहा था।</p>
-        <p><b>2.)</b> मौके पर NVIS App के माध्यम से इलेक्ट्रॉनिक पंचनामा क्रमांक <b><span class="field-panchanama_no"></span></b> तैयार किया गया।</p>
-        <p><b>3.)</b> आरोपी को धारा 152 के तहत सूचना पत्र (क्रमांक <span class="field-notice_no"></span> दिनांक <span class="field-notice_date"></span>) प्रेषित किया गया, किन्तु राशि जमा नहीं की गई।</p>
+    <!-- Page 2 of Complaint -->
+    <div class="print-page bg-white shadow-lg mx-auto p-12 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+      <div class="text-sm font-bold mb-4 underline">10. अपराध का विवरण :</div>
+      <div class="text-xs space-y-4 text-justify leading-relaxed">
+        <p class="font-bold">अपराध का विवरण निम्नानुसार है :-</p>
+        <p>
+          <b>I.)</b> यह कि, उपरोक्त उल्लेखित अपराध दिनांक <span class="field-inspection_date"></span> को समय लगभग <span class="field-inspection_time"></span> पर म.प्र.पश्चिम क्षेत्र विद्युत वितरण कंपनी लिमिटेड, संभाग बड़नगर (जिसे आगे अभियोगी कंपनी संबोधित किया गया है) का निरीक्षण दल, जिसके सदस्य परिवाद पत्र के कॉलम नंबर 8 में नामित गवाह क्रमांक 1 लगायत 3 हैं, अभियोगी कंपनी के विद्युत कनेक्शनों के आकस्मिक निरीक्षण हेतु आरोपी / उपयोगकर्ता के परिसर ग्राम <span class="field-village"></span> पर पहुँचा तथा मौका निरीक्षण किया। मौके पर पाया गया कि अपराधग्रस्त परिसर पर आरोपी का कोई वैधानिक विद्युत कनेक्शन विद्यमान नहीं है तथा आरोपीगण द्वारा एल.टी. लाइन से सीधे अवैध रूप से तार जोड़कर अपने भवन में विभिन्न विद्युत उपकरण (<span class="field-connected_load_details font-semibold"></span>) चलाकर कुल <b><span class="field-sanctioned_load font-bold"></span></b> भार का अनाधिकृत रूप से उपयोग करके विद्युत ऊर्जा का बेईमानीपूर्वक अवैध उपयोग व चोरी की जा रही है। मौके पर आरोपी <span class="field-consumer_name"></span> का पुत्र <span class="field-user_name"></span> आरोपी के प्रतिनिधि के रूप में उपस्थित मिला। आरोपी के प्रतिनिधि की उपस्थिति में निरीक्षण कार्यवाही संपादित की गई। आरोपी के परिसर पर कुल <span class="field-sanctioned_load font-bold"></span> का विद्युत भार अवैधानिक रूप से उपयोग में चालू पाया गया।
+        </p>
+        <p>
+          <b>II.)</b> यह कि, निरीक्षणकर्ता अधिकारी द्वारा निरीक्षण के पश्चात् मौके पर ही विधिवत मौका निरीक्षण का New Vigilance Information System जिसे NVIS App कहा जाता है, पर मोबाईल के माध्यम से इलेक्ट्रॉनिक रूप में पंचनामा (क्रमांक <span class="field-panchanama_no font-bold"></span>) तैयार करके तथा संयोजित भार को उपकरणों की आदर्श भार क्षमता एवं प्रकार अनुसार पंचनामे पर अंकित करके आरोपी के प्रतिनिधि को पढ़कर सुनाया व दिखाया गया। तत्पश्चात पंचनामे पर परिसर स्वामी की ओर से आरोपी के प्रतिनिधि द्वारा स्वेच्छा से अपने डिजिटल/हस्ताक्षर किए गए तथा अभियोगी कंपनी की ओर से निरीक्षणकर्ता की हैसियत से निरीक्षणकर्ता अधिकारी एवं दल सदस्यों द्वारा यथास्थान अपने-अपने हस्ताक्षर किए गए। इसके साथ ही मौके का नजरी नक्शा (उत्तर: मकान, दक्षिण: मकान, पूर्व: रास्ता, पश्चिम: रास्ता) एवं गूगल मैप लोकेशन चार्ट भी विधिवत संलग्न किया गया।
+        </p>
+        <p>
+          <b>III.)</b> यह कि, आरोपी द्वारा अवैधानिक रूप से उपयोग की जा रही विद्युत ऊर्जा का निर्धारण, म.प्र. विद्युत नियामक आयोग द्वारा जारी टैरिफ दरों के अनुसार किया जाकर निर्धारण की सूचना तथा सुनवाई का अवसर देने के आशय से आरोपी के सही पते पर पंचनामे का पेपर प्रिंटआउट, अंतिम निर्धारण आदेश की प्रति (कुल आकलित खपत <b><span class="field-total_consumption_units font-bold"></span></b> यूनिट हेतु निर्धारण राशि <b>₹<span class="field-assessment_amount font-bold"></span>/-</b>) एवं धारा 152 का सूचना पत्र (क्रमांक <span class="field-notice_no font-bold"></span> दिनांक <span class="field-notice_date"></span>) स्पीड पोस्ट (रसीद क्र. <span class="field-speed_post_no font-semibold"></span>) द्वारा प्रेषित / तामील किए गए, जिसके द्वारा निर्धारित राशि एवं शमन शुल्क रुपये <b>₹<span class="field-compounding_amount"></span>/-</b> संदाय करके अपराध के शमन का आरोपी को अवसर प्रदान किया गया, किन्तु आरोपी / उपयोगकर्ता ने उक्त निर्धारित राशि व शमन शुल्क जमा नहीं किए और न ही अपनी ओर से इस विषयक कोई प्रतिवाद प्रस्तुत किया, इसलिए यह परिवाद पत्र माननीय न्यायालय के समक्ष प्रस्तुत किया जाना आवश्यक हुआ है।
+        </p>
+      </div>
+    </div>
+
+    <!-- Page 3 of Complaint -->
+    <div class="print-page bg-white shadow-lg mx-auto p-12 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+      <div class="text-xs space-y-4 text-justify leading-relaxed">
+        <p>
+          <b>IV.)</b> यह कि, आरोपीगण द्वारा अभियोगी वितरण कंपनी को आर्थिक क्षति कारित करने के बेईमानीपूर्ण आशय से विद्युत ऊर्जा की सीधी चोरी की गई है। आरोपीगण का कृत्य धारा 135 विद्युत अधिनियम 2003 के अंतर्गत दंडनीय होकर संज्ञेय तथा गैर-जमानतीय अपराध की श्रेणी में आता है।
+        </p>
+        <p>
+          <b>11.)</b> विद्युत ऊर्जा की चोरी से हुई आर्थिक क्षति : रुपये <b>₹<span class="field-assessment_amount font-bold"></span>/-</b> एवं शमन शुल्क रुपये <b>₹<span class="field-compounding_amount font-bold"></span>/-</b> सकल राशि रुपये <b>₹<span class="field-total_amount font-bold"></span>/-</b> प्रेषित की गई है।
+        </p>
+        <p>
+          <b>12.) प्रस्तुत दस्तावेज :</b><br>
+          1. इलेक्ट्रॉनिक पंचनामा व अंतिम निर्धारण आदेश क्रमांक <span class="field-panchanama_no font-semibold"></span> दिनांक <span class="field-inspection_date font-semibold"></span>।<br>
+          2. सूचना पत्र अंतर्गत धारा 152 विद्युत अधिनियम 2003 (पत्र क्र. <span class="field-notice_no font-semibold"></span> दिनांक <span class="field-notice_date font-semibold"></span>) व स्पीड पोस्ट डाक सूची/रसीद क्र. <span class="field-speed_post_no font-semibold"></span>।<br>
+          3. मौका नजरी नक्शा (Site Map) एवं गूगल मैप (Location Chart)।<br>
+          4. भारतीय साक्ष्य अधिनियम (B.S.A.) की धारा 63(4) का प्रमाण पत्र (इलेक्ट्रॉनिक रिकॉर्ड हेतु)।<br>
+          5. कंपनी का शक्ति प्रत्यायोजन आदेश (Delegation of Power Order No. CMD/01/2013) की प्रति।<br>
+          6. अन्य दस्तावेज आवश्यकतानुसार प्रस्तुत किए जा सकेंगे।
+        </p>
+        <p>
+          <b>13.) परिसीमा:</b> परिवाद पत्र निर्धारित समयवधी मैं प्रस्तुत है।
+        </p>
+        <p>
+          <b>14.) न्यायालय की अधिकारिता :</b> माननीय न्यायालय को धारा 151 विद्युत अधिनियम 2003 के अंतर्गत प्रकरण के विचारण एवं श्रवणाधिकार प्राप्त है।
+        </p>
+        <p>
+          <b>15.) परिवाद पत्र प्रस्तुत करने संबंधी प्राधिकार :</b> परिवादी लोक सेवक होकर म.प्र.पश्चिम क्षेत्र विद्युत वितरण कंपनी लिमिटेड, <span class="field-distribution_center font-semibold"></span> वितरण केंद्र पर बतौर कनिष्ठ यंत्री पदस्थ है तथा म.प्र. गजट नोटिफिकेशन के अनुसरण में अभियोगी कंपनी की ओर से माननीय विशेष न्यायालय के समक्ष परिवाद प्रस्तुत करने हेतु सक्षम अधिकारी घोषित है।
+        </p>
+        <p>
+          <b>16.) NVIS App द्वारा तैयार पंचनामें की साक्ष्य में ग्राह्यता :</b> प्रस्तुत पंचनामा सूचना एवं प्रौद्योगिकी विभाग द्वारा तैयार किए गए New Vigilance Information System जिसे NVIS App कहा जाता है, के माध्यम से इलेक्ट्रॉनिक रूप में तैयार किया गया है। उक्त पंचनामा इलेक्ट्रॉनिक अभिलेख में अंतर्विष्ट सूचना होकर इलेक्ट्रॉनिक दस्तावेज के पेपर प्रिंट के रूप में साक्ष्य में पूर्णतः ग्राह्य है।
+        </p>
+        <p>
+          <b>17.) प्रस्तुत पंचनामा विषयक अन्य परिवाद प्रचलित ना होने संबंधी घोषणा :</b> परिवादी द्वारा यह घोषित किया जाता है कि प्रकरण में प्रस्तुत इलेक्ट्रॉनिक रूप से तैयार किए गए उपरोक्त पंचनामे के पेपर प्रिंट से अन्य कोई परिवाद माननीय न्यायालय के समक्ष या किसी अन्य न्यायालय में उक्त अपराध के संबंध में पूर्व से विचाराधीन नहीं है और ना ही प्रस्तुत किया गया है।
+        </p>
+      </div>
+    </div>
+
+    <!-- Page 4 of Complaint -->
+    <div class="print-page bg-white shadow-lg mx-auto p-12 border relative text-black" style="width: 210mm; min-height: 297mm; font-family: 'Noto Sans Devanagari', sans-serif;">
+      <div class="text-center font-bold text-sm my-6">।। प्रार्थना ।।</div>
+      <div class="text-xs text-justify leading-relaxed space-y-4">
+        <p>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;अतः परिवाद पत्र प्रस्तुत कर माननीय महोदय से सादर निवेदन है कि आरोपीगण के विरुद्ध प्रकरण दर्ज कर विद्युत अधिनियम 2003 के अंतर्गत आरोपीगण को उनके द्वारा किए गए अपराध के लिए उपबंधित अधिकतम दंड एवं जुर्माने से दंडित किया जावे। अभियोगी वितरण कंपनी को हुई विद्युत क्षति की राशि रुपये <b>₹<span class="field-assessment_amount font-bold"></span>/-</b> एवं शमन शुल्क रुपये <b>₹<span class="field-compounding_amount font-bold"></span>/-</b> (सकल राशि रुपये <b>₹<span class="field-total_amount font-bold"></span>/-</b>) व परिवाद पत्र प्रस्तुत करने में हुआ समस्त व्यय सहित अन्य कोई सहायता जो माननीय न्यायालय को अभियोगी वितरण कंपनी के हित में उचित लगे, आरोपीगण से दिलाई जावे। यही विनय है। इति।
+        </p>
       </div>
 
-      <!-- Static Advocate Details -->
-      <div class="mt-8 flex justify-between text-xs">
+      <div class="mt-12 flex justify-between text-xs font-semibold">
         <div>
-          <p>दिनांक: __/__/2026</p>
+          <p>इति दिनांक: ____/____/2026</p>
           <p>स्थान: उज्जैन</p>
         </div>
-        <div class="text-right">
-          <p class="font-bold">परिवादी द्वारा अधिवक्ता</p>
-          <p class="font-bold mt-4">श्रीमती अर्पिता रावल</p>
-          <p>विशेष लोक अभियोजक / पैनल अधिवक्ता</p>
-          <p>नामांकन क्रमांक: MP/838/2012</p>
-          <p>बड़नगर / उज्जैन (म.प्र.) | मो.: 8878977124</p>
+        <div class="text-right leading-relaxed">
+          <p class="font-bold">प्रार्थी</p>
+          <p class="font-bold mt-4">(<span class="field-officer_name"></span>)</p>
+          <p>कनिष्ठ यंत्री, वितरण केंद्र <span class="field-distribution_center"></span></p>
+          <p>संभाग बड़नगर, म.प्र.प.क्षे.वि.वि.क.लि.</p>
+          <p class="font-bold text-gray-700">अभियोगी (परिवादी)</p>
+          
+          <p class="font-bold mt-8">द्वारा अधिवक्ता</p>
+          <p class="font-bold mt-4">(अर्पिता रावल एवं सहयोगी अधिवक्ता)</p>
+          <p>विशेष लोक अभियोजक / अधिवक्ता</p>
+          <p>अंतर्गत विद्युत अधिनियम 2003</p>
         </div>
       </div>
     </div>

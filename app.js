@@ -26,22 +26,30 @@ async function processDocument() {
     const promptText = `
       Extract the following electricity theft inspection details from this document into a valid JSON object:
       {
-        "consumer_name": "Name of primary owner/consumer",
-        "user_name": "Name of user/accused present",
-        "user_age": "Age",
-        "mobile": "Mobile number",
-        "village": "Village name",
-        "panchanama_no": "Panchanama number",
-        "inspection_date": "Inspection Date (DD-MM-YYYY)",
-        "inspection_time": "Inspection Time",
-        "officer_name": "Inspection Officer Name",
-        "distribution_center": "Distribution center / Vitran Kendra",
-        "sanctioned_load": "Connected Load e.g. 2530 WATT",
-        "assessment_amount": "Assessment Amount in INR",
-        "compounding_amount": "Compounding Amount in INR",
-        "total_amount": "Total Amount in INR",
-        "notice_no": "Section 152 notice number",
-        "notice_date": "Notice Date"
+        "consumer_name": "Name of primary owner/consumer (e.g. अनवर ख़ॉन)",
+        "consumer_father_name": "Father's name of primary owner/consumer (e.g. शकुर खान)",
+        "user_name": "Name of user/accused present (e.g. सलीम ख़ॉ)",
+        "user_father_name": "Father's name of user/accused present (e.g. अनवर ख़ॉ)",
+        "user_age": "Age of user/accused present (e.g. 25)",
+        "mobile": "Mobile number (e.g. 9977997186)",
+        "village": "Village name (e.g. जहाँगीरपुर)",
+        "panchanama_no": "Panchanama number (e.g. 171780)",
+        "inspection_date": "Inspection Date in DD-MM-YYYY format (e.g. 26-02-2024)",
+        "inspection_time": "Inspection Time (e.g. 03:05 PM)",
+        "officer_name": "Inspection Officer Name (e.g. महेश कुमार वर्मा)",
+        "officer_father_name": "Father's name of Inspection Officer (e.g. मनोहर लाल वर्मा)",
+        "officer_age": "Age of Inspection Officer (e.g. 39)",
+        "distribution_center": "Distribution center / Vitran Kendra (e.g. जहाँगीरपुर)",
+        "sanctioned_load": "Connected Load / load utilized (e.g. 2530 वाट)",
+        "connected_load_details": "Detailed connected load items list (e.g. कूलर-1 क्षमता 700 वाट, पंखा-2 क्षमता 120 वाट, इमर्शन हीटर-1 क्षमता 1000 वाट, LED बल्ब-5 क्षमता 50 वाट, TV/LCD-1 क्षमता 160 वाट, वाशिंग मशीन-1 क्षमता 500 वाट)",
+        "assessment_amount": "Assessment Amount / Net assessment amount in INR (e.g. 20,102)",
+        "compounding_amount": "Compounding Amount in INR (e.g. 1,000)",
+        "total_amount": "Total Amount in INR (e.g. 21,102)",
+        "total_consumption_units": "Total consumption units calculated (e.g. 1032)",
+        "notice_no": "Section 152 notice number (e.g. 1/कायंब/सामा./पी-4/678)",
+        "notice_date": "Notice Date in DD-MM-YYYY format (e.g. 26-05-2026)",
+        "speed_post_no": "Speed post tracking receipt number (e.g. E1195463998IN)",
+        "witness_list": "List of witnesses present (e.g. 1. परिवादी स्वयं (महेश कुमार वर्मा), 2. श्री मोहन सिंह, 3. श्री सुरेश सिंगाठिया)"
       }
       Respond ONLY with the raw JSON string. Do not include markdown code blocks.
     `;
@@ -77,7 +85,33 @@ async function processDocument() {
     // Clean raw JSON formatting if wrapped in codeblocks
     const cleanJson = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
 
-    extractedData = JSON.parse(cleanJson);
+    const defaultData = {
+      consumer_name: "",
+      consumer_father_name: "",
+      user_name: "",
+      user_father_name: "",
+      user_age: "",
+      mobile: "",
+      village: "",
+      panchanama_no: "",
+      inspection_date: "",
+      inspection_time: "",
+      officer_name: "",
+      officer_father_name: "",
+      officer_age: "",
+      distribution_center: "",
+      sanctioned_load: "",
+      connected_load_details: "",
+      assessment_amount: "",
+      compounding_amount: "",
+      total_amount: "",
+      total_consumption_units: "",
+      notice_no: "",
+      notice_date: "",
+      speed_post_no: "",
+      witness_list: ""
+    };
+    extractedData = Object.assign({}, defaultData, JSON.parse(cleanJson));
     populateFormGrid(extractedData);
     document.getElementById('reviewSection').classList.remove('hidden');
 
