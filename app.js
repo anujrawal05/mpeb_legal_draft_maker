@@ -1,10 +1,10 @@
 let extractedData = {};
 
 async function processDocument() {
-  const apiKey = window.GEMINI_API_KEY;
+  const apiKey = "AQ.Ab8RN6LFJZ5zKugWI_o5na6bjw0ka4Q3_11hJsswBSMhZ8JItQ";
   const fileInput = document.getElementById('fileInput').files[0];
 
-  if (!apiKey) return alert("API Key is missing. Please check config.js.");
+  if (!apiKey) return alert("Please configure the Gemini API Key.");
   if (!fileInput) return alert("Please upload the inspection PDF/image.");
 
   document.getElementById('processBtn').innerText = "Analyzing Document with AI...";
